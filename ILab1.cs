@@ -179,7 +179,7 @@ namespace OOP1Labs
     /// <param name="y2">Andra personens födelseår.</param>
     /// <param name="m2">Andra personens födelsemånad.</param>
     /// <param name="d2">Andra personens födelsedag.</param>
-    /// <return>En sträng på formen <code>"[y] year(s), [m] month(s), and [d] day(s).</code></return>
+    /// <returns>En sträng på formen <code>"[y] year(s), [m] month(s), and [d] day(s).</code></returns>
     string DateDifference(int y1, int m1, int d1, int y2, int m2, int d2);
 
 		/// <title>Skottår</title>
