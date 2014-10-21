@@ -25,18 +25,13 @@ namespace OOP1Labs
 		#endregion
 
 
-
-
-
 		#region String manipulation
 		/// <title>Välkomsttext</title>
 		/// <signature>string Hello(string name);</signature>
-		/// <summary>Metoden returnerar ett hälsningsmeddelande innehållande det inmatade namnet.</summary>
+		/// <summary>Metoden returnerar ett hälsningsmeddelande innehållande det inmatade namnet. Om användaren skickar en tom sträng, eller <code>null</code>, (d.v.s. inget namn) så ska istället namnet <code>"Anonymous"</code> användas.</summary>
 		/// <returns>En sträng på formen <code>"Hello, [name]."</code></returns>
 		string Hello(string name);
 		#endregion
-
-
 
 
 		#region Data types and division
@@ -54,7 +49,7 @@ namespace OOP1Labs
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>Kvoten av de två talen, inklusive decimaler.</returns>
-		double Divide(int numerator, int denominator);
+		double DivideExact(int numerator, int denominator);
 
 		/// <title>Division med decimaltal</title>
 		/// <signature>double Divide(double numerator, double denominator);</signature>
@@ -62,9 +57,9 @@ namespace OOP1Labs
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>Kvoten av de två talen, inklusive decimaler.</returns>
-		double Divide(double numerator, double denominator);
+		double DivideExact(double numerator, double denominator);
 
-		/// <title>Division med decimaltal till heltal</title>
+		/// <title>Division med decimaltal till heltal (trunkering)</title>
 		/// <signature>int DivideAndTruncate(double numerator, double denominator);</signature>
 		/// <summary>Utför division på decimaltal (d.v.s. ej heltalsdivision), men trunkerar sedan decimalerna och returnerar ett heltal.</summary>
 		/// <param name="numerator">Täljaren</param>
@@ -72,18 +67,22 @@ namespace OOP1Labs
 		/// <returns>Kvoten av de två talen, med trunkerade decimaler.</returns>
 		int DivideAndTruncate(double numerator, double denominator);
 
+    /// <title>Division med decimaltal till heltal (avrundning)</title>
+    /// <signature>int DivideAndRound(double numerator, double denominator);</signature>
+    /// <summary>Utför division på decimaltal (d.v.s. ej heltalsdivision), och avrundar sedan till närmaste heltal.</summary>
+    /// <param name="numerator">Täljaren</param>
+    /// <param name="denominator">Nämnaren</param>
+    /// <returns>Kvoten av de två talen, avrundat till närmaste heltal.</returns>
+		int DivideAndRound(double numerator, double denominator);
+
 		/// <title>Division med Rest</title>
 		/// <signature>string DivideWithRemainder(int numerator, int denominator);</signature>
 		/// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen, samt kvarvarande rest. Om användaren försöker dela med 0 så ska programmet krascha.</summary>
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
-		/// <returns>En sträng på formen <code>"[numerator] dividerat med [denominator] ger [z], rest [w]."</code>. Där <code>[z]</code> motsvarar heltalskvoten, och <code>[w]</code> resten efter utförd division.</returns>
+		/// <returns>En sträng på formen <code>"[numerator] divided by [denominator] gives [z], remainder [w]."</code>. Där <code>[z]</code> motsvarar heltalskvoten, och <code>[w]</code> resten efter utförd division.</returns>
 		string DivideWithRemainder(int numerator, int denominator);
 		#endregion
-
-
-
-
 
 
 		#region Comparison Operators (and code reuse)
@@ -106,13 +105,11 @@ namespace OOP1Labs
 		int Greatest(int x, int y, int z, int w);
 
 		/// <title>Större än?</title>
-		/// <signature>int IsGreater(int x, int y);</signature>
-		/// <summary>Undersöker det andra talet är större än det första.</summary>
-		/// <returns><code>true</code> om det andra talet är större än det första. Annars <code>false</code>.</returns>
-		int IsGreater(int x, int y);
+		/// <signature>bool IsGreater(int x, int y);</signature>
+		/// <summary>Undersöker det första talet är större än det första.</summary>
+		/// <returns><code>true</code> om det första talet är större än det andra. Annars <code>false</code>.</returns>
+		bool IsGreater(int x, int y);
 		#endregion
-
-
 
 
 		#region Logical Operators
@@ -142,11 +139,6 @@ namespace OOP1Labs
 		#endregion
 
 
-
-
-
-
-
 		#region Conversions
 		/// <title>Konvertera Heltal till Sträng</title>
 		/// <signature>string IntToString(int number);</signature>
@@ -168,23 +160,27 @@ namespace OOP1Labs
 		#endregion
 
 
-
-
 		#region Assignments
-		/// <title>Kvinna eller Man</title>
-		/// <signature>string Gender(string pnr);</signature>
-		/// <summary>Undersöker om de fyra sista siffrorna i ett personnummer tillhör en man eller en kvinna. Alla personnummer som ges till denna metod måste innehålla exakt fyra siffror. All annan form av input resulterar i ett felmeddelande enligt nedan. Om den näst sista siffran är jämn så tillhör personnumret en kvinna, och vice versa för en man.</summary>
-		/// <returns>Strängen <code>"WOMAN"</code> om personnumret tillhör en kvinna. Strängen <code>"MAN"</code> om personnumret tillhör en man. Strängen "BAD INPUT" om personnumret inte uppfyllde kraven.</returns>
-		string Gender(string pnr);
-
 		/// <title>Karusellåkning</title>
 		/// <signature>bool CanJoyride(int age, int cm, bool hasHeartCondition);</signature>
-		/// <summary>Undersöker huruvida en person får åka karusell eller inte. Kraven för att få åka karusell är att vara 12 år eller över, emellan 150 och 210 cm lång, och att en är fri ifrån hjärtproblem.</summary>
+		/// <summary>Undersöker huruvida en person får åka karusell eller inte. Kraven för att få åka karusell är att vara 12 år eller över, emellan 150 och 210 cm (inklusive) lång, och att en är fri ifrån hjärtproblem. Myndiga personer får vara kortare än 150 cm, men inte kortare än 130 cm.</summary>
 		/// <param name="age">Ålder i hela år</param>
 		/// <param name="cm">Längd i centimeter</param>
 		/// <param name="hasHeartCondition">Har personen hjärtproblem?</param>
 		/// <returns><code>true</code> om personen får åka karusell och vice versa.</returns>
 		bool CanJoyride(int age, int cm, bool hasHeartCondition);
+
+    /// <title>Datumskillnader</title>
+    /// <signature>string DateDistance(int y1, int m1, int d1, int y2, int m2, int d2);</signature>
+    /// <summary>Räknar naivt ut skillnaden mellan de olika delarna av ett datum. Metoden ska alltid returnera skillnaden i positiva tal. Det spelar alltså ingen roll om A > B eller B > A. Metoden behöver inte ta hänsyn till att inkorrekta datum kan matas in. Metoden räknar på alla datum oavsett hur "orimliga" de är. Metoden ska alltså inte räkna ut hur mycket "större" det ena datumet är än det andra (eftersom det kräver information om dagar i månader etc.), istället ska den endast naivt visa den absoluta differensen emellan de två åren, de två månaderna och de två dagarna.</summary>
+    /// <param name="y1">Första personens födelseår.</param>
+    /// <param name="m1">Första personens födelsemånad.</param>
+    /// <param name="d1">Första personens födelsedag.</param>
+    /// <param name="y2">Andra personens födelseår.</param>
+    /// <param name="m2">Andra personens födelsemånad.</param>
+    /// <param name="d2">Andra personens födelsedag.</param>
+    /// <return>En sträng på formen <code>"[y] year(s), [m] month(s), and [d] day(s).</code></return>
+    string DateDifference(int y1, int m1, int d1, int y2, int m2, int d2);
 
 		/// <title>Skottår</title>
 		/// <signature>bool IsLeapYear(int year);</signature>
