@@ -37,7 +37,7 @@ namespace OOP1Labs
 		#region Data types and division
 		/// <title>Heltalsdivision</title>
 		/// <signature>int DivideIntegers(int numerator, int denominator);</signature>
-		/// <summary>Metoden utför heltalsdivision. Om användaren försöker dela med 0 så ska programmet krascha.</summary>
+		/// <summary>Metoden utför heltalsdivision.</summary>
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>Heltalskvoten av de två talen.</returns>
@@ -45,7 +45,7 @@ namespace OOP1Labs
 
 		/// <title>Division ifrån heltal till decimaltal</title>
 		/// <signature>double Divide(int numerator, int denominator);</signature>
-		/// <summary>Utför division på heltal, men där resultatet ges på decimalform. Om användaren försöker dela med 0 så ska programmet krascha.</summary>
+		/// <summary>Utför division på heltal, men där resultatet ges på decimalform.</summary>
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>Kvoten av de två talen, inklusive decimaler.</returns>
@@ -53,7 +53,7 @@ namespace OOP1Labs
 
 		/// <title>Division med decimaltal</title>
 		/// <signature>double Divide(double numerator, double denominator);</signature>
-		/// <summary>Utför division på heltal, men där resultatet ges på decimalform. Om användaren försöker dela med 0 så ska programmet krascha.</summary>
+		/// <summary>Utför division på heltal, men där resultatet ges på decimalform.</summary>
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>Kvoten av de två talen, inklusive decimaler.</returns>
@@ -77,11 +77,22 @@ namespace OOP1Labs
 
 		/// <title>Division med Rest</title>
 		/// <signature>string DivideWithRemainder(int numerator, int denominator);</signature>
-		/// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen, samt kvarvarande rest. Om användaren försöker dela med 0 så ska programmet krascha.</summary>
+		/// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen, samt kvarvarande rest.</summary>
 		/// <param name="numerator">Täljaren</param>
 		/// <param name="denominator">Nämnaren</param>
 		/// <returns>En sträng på formen <code>"[numerator] divided by [denominator] gives [z], remainder [w]."</code>. Där <code>[z]</code> motsvarar heltalskvoten, och <code>[w]</code> resten efter utförd division.</returns>
 		string DivideWithRemainder(int numerator, int denominator);
+
+    /// <title>Division med Absolut Rest</title>
+    /// <signature>string DivideWithAbsoluteRemainder(int numerator, int denominator);</signature>
+    /// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen med absolut rest. Om det absoluta värdet av distansen emellan täljaren ("numerator") och den positiva resten är lika stor som värdet av distansen emellan täljaren ("numerator") och den negativa resten, så välj alltid den positiva resten.</summary>
+    /// <param name="numerator">Täljaren</param>
+    /// <param name="denominator">Nämnaren</param>
+    /// <returns>En sträng på formen <code>"[numerator] divided by [denominator] gives [z], remainder [w]."</code>. Där <code>[z]</code> motsvarar heltalskvoten givet absolut rest, och <code>[w]</code> den absoluta resten.</returns>
+    /// <example>
+    /// <code>DivideWithAbsoluteRemainder(8, 3);</code>
+    /// <returns>"8 divided by 3 gives 3, remainder -1."</returns></example>
+    string DivideWithAbsoluteRemainder(int numerator, int denominator);
 		#endregion
 
 
@@ -180,7 +191,7 @@ namespace OOP1Labs
     /// <param name="m2">Andra personens födelsemånad.</param>
     /// <param name="d2">Andra personens födelsedag.</param>
     /// <returns>En sträng på formen <code>"[y] year(s), [m] month(s), and [d] day(s).</code></returns>
-    string DateDifference(int y1, int m1, int d1, int y2, int m2, int d2);
+    string DateDistance(int y1, int m1, int d1, int y2, int m2, int d2);
 
 		/// <title>Skottår</title>
 		/// <signature>bool IsLeapYear(int year);</signature>
