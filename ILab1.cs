@@ -85,7 +85,7 @@ namespace OOP1Labs
 
     /// <title>Division med Absolut Rest</title>
     /// <signature>string DivideWithAbsoluteRemainder(int numerator, int denominator);</signature>
-    /// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen med absolut rest. Om det absoluta värdet av distansen emellan täljaren ("numerator") och den positiva resten är lika stor som värdet av distansen emellan täljaren ("numerator") och den negativa resten, så välj alltid den positiva resten.</summary>
+    /// <summary>Utför division och returnerar en sträng som förtäljer resultatet av heltalsdivisionen med absolut rest. Om det absoluta värdet av distansen emellan täljaren ("numerator") och den positiva resten är lika stor som värdet av distansen emellan täljaren ("numerator") och den negativa resten, så välj alltid den positiva resten, annars välj den minsta resten.</summary>
     /// <param name="numerator">Täljaren</param>
     /// <param name="denominator">Nämnaren</param>
     /// <returns>En sträng på formen <code>"[numerator] divided by [denominator] gives [z], remainder [w]."</code>. Där <code>[z]</code> motsvarar heltalskvoten givet absolut rest, och <code>[w]</code> den absoluta resten.</returns>
