@@ -990,6 +990,206 @@ namespace OOP1Labs
     }
   }
 
+  namespace L1_08_Selection
+  {
+    [TestFixture]
+    public class L1_08_01_RequestPony : Lab1TestBase
+    {
+      [Test]
+      public void RequestPony_TooYoung_IsDenied()
+      {
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(11, 66));
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(8,  65));
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(5,  50));
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(2,  30));
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(0, 29));
+      }
+
+      [Test]
+      public void RequestPony_WeightUnder31_GetsAPony()
+      {
+        Assert.AreEqual("Class A pony", lab.RequestPony(12, 20));
+        Assert.AreEqual("Class A pony", lab.RequestPony(22, 21));
+        Assert.AreEqual("Class A pony", lab.RequestPony(34, 23));
+        Assert.AreEqual("Class A pony", lab.RequestPony(42, 24));
+        Assert.AreEqual("Class A pony", lab.RequestPony(56, 29));
+        Assert.AreEqual("Class A pony", lab.RequestPony(72, 30));
+      }
+
+      [Test]
+      public void RequestPony_WeightUnder51_GetsBPony()
+      {
+        Assert.AreEqual("Class B pony", lab.RequestPony(12, 31));
+        Assert.AreEqual("Class B pony", lab.RequestPony(22, 32));
+        Assert.AreEqual("Class B pony", lab.RequestPony(34, 45));
+        Assert.AreEqual("Class B pony", lab.RequestPony(56, 49));
+        Assert.AreEqual("Class B pony", lab.RequestPony(72, 50));
+      }
+
+      [Test]
+      public void RequestPony_WeightUnder66_GetsBPony()
+      {
+        Assert.AreEqual("Class C pony", lab.RequestPony(12, 51));
+        Assert.AreEqual("Class C pony", lab.RequestPony(22, 52));
+        Assert.AreEqual("Class C pony", lab.RequestPony(34, 59));
+        Assert.AreEqual("Class C pony", lab.RequestPony(56, 64));
+        Assert.AreEqual("Class C pony", lab.RequestPony(72, 65));
+      }
+
+      [Test]
+      public void RequestPony_WeightOver65_GetsBPony()
+      {
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(12, 66));
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(22, 67));
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(34, 78));
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(56, 104));
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(72, 18070));
+      }
+    }
+
+    [TestFixture]
+    public class L1_08_02_WhatIsForLunch : Lab1TestBase
+    {
+      [Test]
+      public void WhatIsForLunch_IncorrectInput_ReturnsErrorString()
+      {
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch(null));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch(""));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch("0"));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch("8"));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch("asd"));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch("asdh KJFDGGDHJKASDFGKJHDS sdga fgs"));
+        Assert.AreEqual("Incorrect input", lab.WhatIsForLunch("&(%(&€askghd"));
+      }
+
+      [Test]
+      [TestCase("MONDAY")]
+      [TestCase("Monday")]
+      [TestCase("monday")]
+      [TestCase("mon")]
+      [TestCase("1")]
+      public void WhatIsForLunch_Weekday1_ReturnsRatatouilleMenu(string weekday)
+      {
+        Assert.AreEqual("Ratatouille", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("TUESDAY")]
+      [TestCase("Tuesday")]
+      [TestCase("tuesday")]
+      [TestCase("tue")]
+      [TestCase("2")]
+      public void WhatIsForLunch_Weekday2_ReturnsPancakesMenu(string weekday)
+      {
+        Assert.AreEqual("Pancakes and pea soup", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("WEDNESDAY")]
+      [TestCase("Wednesday")]
+      [TestCase("wednesday")]
+      [TestCase("wed")]
+      [TestCase("3")]
+      public void WhatIsForLunch_Weekday3_ReturnsStewMenu(string weekday)
+      {
+        Assert.AreEqual("Winter vegetable stew", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("THURSDAY")]
+      [TestCase("Thursday")]
+      [TestCase("thursday")]
+      [TestCase("thu")]
+      [TestCase("4")]
+      public void WhatIsForLunch_Weekday4_ReturnsPastaMenu(string weekday)
+      {
+        Assert.AreEqual("Spinach and garlic pasta", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("FRIDAY")]
+      [TestCase("Friday")]
+      [TestCase("friday")]
+      [TestCase("fri")]
+      [TestCase("5")]
+      public void WhatIsForLunch_Weekday5_ReturnsSlidersMenu(string weekday)
+      {
+        Assert.AreEqual("Sliders", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("SATURDAY")]
+      [TestCase("Saturday")]
+      [TestCase("saturday")]
+      [TestCase("sat")]
+      [TestCase("6")]
+      public void WhatIsForLunch_Weekday6_ReturnsQuesadillasMenu(string weekday)
+      {
+        Assert.AreEqual("Black bean quesadillas", lab.WhatIsForLunch(weekday));
+      }
+
+      [Test]
+      [TestCase("SUNDAY")]
+      [TestCase("Sunday")]
+      [TestCase("sunday")]
+      [TestCase("sun")]
+      [TestCase("7")]
+      public void WhatIsForLunch_Weekday7_ReturnsSlidersMenu(string weekday)
+      {
+        Assert.AreEqual("Raw food salad", lab.WhatIsForLunch(weekday));
+      }
+    }
+
+    [TestFixture]
+    public class L1_08_03_IsTheBathReady : Lab1TestBase
+    {
+      [Test]
+      [TestCase("YES", 37)]
+      [TestCase("Yes", 37)]
+      [TestCase("yes", 37)]
+      [TestCase("Y", 37)]
+      [TestCase("y", 37)]
+      public void IsTheBathReady_HasGoodTemperaturedWater_ReturnsTrue(string hasWater, int degrees)
+      {
+        Assert.IsTrue(lab.IsTheBathReady(hasWater, degrees));
+      }
+
+      [Test]
+      [TestCase("NO", 37)]
+      [TestCase("No", 37)]
+      [TestCase("no", 37)]
+      [TestCase("N", 37)]
+      [TestCase("n", 37)]
+      public void IsTheBathReady_NoWater_ReturnsFalse(string hasWater, int degrees)
+      {
+        Assert.IsFalse(lab.IsTheBathReady(hasWater, degrees));
+      }
+
+      [Test]
+      [TestCase("Y", 29)]
+      [TestCase("Y", 28)]
+      [TestCase("Y", 13)]
+      [TestCase("Y", 0)]
+      [TestCase("Y", -4)]
+      public void IsTheBathReady_HasLowTemperaturedWater_ReturnsFalse(string hasWater, int degrees)
+      {
+        Assert.IsFalse(lab.IsTheBathReady(hasWater, degrees));
+      }
+
+      [Test]
+      [TestCase("Y", 49)]
+      [TestCase("Y", 50)]
+      [TestCase("Y", 62)]
+      [TestCase("Y", 74)]
+      [TestCase("Y", 1330)]
+      public void IsTheBathReady_HasHighTemperaturedWater_ReturnsFalse(string hasWater, int degrees)
+      {
+        Assert.IsFalse(lab.IsTheBathReady(hasWater, degrees));
+      }
+
+    }
+  }
+
   // Test setup
   public class Lab1TestBase
   {

@@ -199,5 +199,40 @@ namespace OOP1Labs
     /// <returns><code>true</code> om året året är ett skottår och vice versa.</returns>
     bool IsLeapYear(int year);
     #endregion
+
+
+    #region Selection
+    /// <title>Ponny-klasser</title>
+    /// <signature>string RequestPony(int age, int weight);</signature>
+    /// <summary>Tar emot en ålder och en vikt, och berättar vilken ponny-klass den givna rytten tillåts rida. Om rytten är under 12 år så returneras texten <code>"Too young to compete."</code>. Om rytten väger över 65 kg returneras texten <code>"No ponies available for the given weight class."</code>. I alla andra fall så returneras en sträng på formen <code>"Class [X] pony"</code> där <code>[X]</code> motsvarar korrekt ponny-klass. För att få rida klass A måste rytten väga mindre eller lika med 30 kg. För att få rida klass B måste rytten väga mer än för att få rida klass A och mindre eller lika med 50 kg. För att få rida klass C måste rytten väga mer än för att få rida klass B och mindre eller lika med 65 kg. (PS. Notera att siffrorna är fiktiva)</summary>
+    /// <param name="age">Ålder i hela år</param>
+    /// <param name="weight">Vikt i hela kg</param>
+    /// <returns>En sträng med information om vilken ponny rytten får rida, se beskrivning för närmare detaljer.</returns>
+    string RequestPony(int age, int weight);
+
+    /// <title>Vad serveras till lunch?</title>
+    /// <signature>string WhatIsForLunch(string weekday);</signature>
+    /// <summary>Returnerar en sträng som beksriver dagens lunch. Dagens lunch beror på veckodag, och gäller måndag till söndag enligt följande:
+    /// <code>"Ratatouille"</code>,
+    /// <code>"Pancakes and pea soup"</code>, 
+    /// <code>"Winter vegetable stew"</code>, 
+    /// <code>"Spinach and garlic pasta"</code>, 
+    /// <code>"Sliders"</code>,
+    /// <code>"Black bean quesadillas"</code>, 
+    /// <code>"Raw food salad"</code>
+    /// </summary>
+    /// <param name="weekday">Veckodag på engelska (Följande strängformat måste accepteras: <code>"MONDAY"</code>, <code>"Monday"</code>, <code>"monday"</code>, <code>"mon"</code>, <code>"1"</code>)</param>
+    /// <returns>En sträng innehållandes dagens lunch. Vid inkorrekt input returneras strängen <code>"Incorrect input"</code></returns>
+    string WhatIsForLunch(string weekday);
+
+    /// <title>Går det att bada?</title>
+    /// <signature>string IsBathReady(string containsWater, int degrees);</signature>
+    /// <summary>Kajsa gillar att bada, dock tar vattnet ibland slut hemma och dessutom kan värmen variera ganska mycket. Denna metod undersöker om badet är redo. Kraven för att badet ska vara redo är att det måste finnas vatten, och att vattnet måste vara emellan 30 och 48 grader (inklusive).
+    /// </summary>
+    /// <param name="hasWater">Anger om badet innehåller vatten eller ej, på följande form: [<code>"YES"</code>, <code>"Yes"</code>, <code>"yes"</code>, <code>"y"</code>, <code>"Y"</code>] och motsvarande för nej.</param>
+    /// <param name="degrees">Hela grader i Celcius</param>
+    /// <returns><code>true</code> om det är klart att bada, annars <code>false</code>.</returns>
+    bool IsTheBathReady(string hasWater, int degrees);
+    #endregion
   }
 }
