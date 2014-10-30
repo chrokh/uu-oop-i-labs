@@ -33,7 +33,7 @@ namespace OOP1Labs
       [TestCase(-5, 10)]
       [TestCase(-1040,  2135)]
       [TestCase(-32454, 23)]
-      public void Add_LeftNegativeNumber_ReturnsSum(int x, int y)
+      public void Add_NegativeX_ReturnsSum(int x, int y)
       {
         Assert.AreEqual((x+y), lab.Add(x, y));
       }
@@ -44,7 +44,7 @@ namespace OOP1Labs
       [TestCase(10, -5)]
       [TestCase(2135, -1040)]
       [TestCase(23,   -32454)]
-      public void Add_LeftNegativeNumber_ReturnsSum(int x, int y)
+      public void Add_NegativeY_ReturnsSum(int x, int y)
       {
         Assert.AreEqual((x+y), lab.Add(x, y));
       }
