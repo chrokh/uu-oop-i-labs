@@ -166,7 +166,7 @@ namespace OOP1Labs
     /// <returns>Ett numeriskt tal som motsvarar den sträng som gavs.</returns>
     /// <example>
     /// <code>StringToInt("0320");</code>
-    /// <returns>0320</returns></example>
+    /// <returns>320</returns></example>
     int StringToInt(string number);
     #endregion
 
@@ -221,7 +221,7 @@ namespace OOP1Labs
     /// <code>"Black bean quesadillas"</code>, 
     /// <code>"Raw food salad"</code>
     /// </summary>
-    /// <param name="weekday">Veckodag på engelska (Följande strängformat måste accepteras: <code>"MONDAY"</code>, <code>"Monday"</code>, <code>"monday"</code>, <code>"mon"</code>, <code>"1"</code>)</param>
+    /// <param name="weekday">Veckodag på engelska. Anges på enligt någon av följande format: [<code>"MONDAY"</code>/<code>"Monday"</code>/<code>"monday"</code>/<code>"mon"</code>/<code>"1"</code>]</param>
     /// <returns>En sträng innehållandes dagens lunch. Vid inkorrekt input returneras strängen <code>"Incorrect input"</code></returns>
     string WhatIsForLunch(string weekday);
 
@@ -229,10 +229,26 @@ namespace OOP1Labs
     /// <signature>string IsBathReady(string containsWater, int degrees);</signature>
     /// <summary>Kajsa gillar att bada, dock tar vattnet ibland slut hemma och dessutom kan värmen variera ganska mycket. Denna metod undersöker om badet är redo. Kraven för att badet ska vara redo är att det måste finnas vatten, och att vattnet måste vara emellan 30 och 48 grader (inklusive).
     /// </summary>
-    /// <param name="hasWater">Anger om badet innehåller vatten eller ej, på följande form: [<code>"YES"</code>, <code>"Yes"</code>, <code>"yes"</code>, <code>"y"</code>, <code>"Y"</code>] och motsvarande för nej.</param>
+    /// <param name="hasWater">Anger om badet innehåller vatten eller ej. Anges på enligt någon av följande format: [<code>"YES"</code>/<code>"Yes"</code>/<code>"yes"</code>/<code>"y"</code>/<code>"Y"</code>].</param>
     /// <param name="degrees">Hela grader i Celcius</param>
     /// <returns><code>true</code> om det är klart att bada, annars <code>false</code>.</returns>
     bool IsTheBathReady(string hasWater, int degrees);
+    #endregion
+
+
+    #region Iteration
+    /// <title>Multiplikationstabellssumma</title>
+    /// <signature>string MultiplicationTableSum(int factor, int start, int end);</signature>
+    /// <summary>Denna metod skriver ut alla multiplikationer för faktorn <code>factor</code>, ifrån <code>start</code> till <code>end</code>, och summerar alla produkter.</summary>
+    /// <param name="factor">Det tal vars multiplikationstabell som ska skrivas ut.</param>
+    /// <param name="start">Första talet som ska multipliceras med <code>factor</code></param>
+    /// <param name="end">Sista talet som ska multipliceras med <code>factor</code></param>
+    /// <returns>En sträng enligt den form som anges i exemplet nedan. Om det inte finns några uträkningar att utföra så ska <code>"0"</code> returneras.</returns>
+    /// <example>
+    /// <code>MultiplicationTableSum(8, 3, 6);</code>
+    /// <returns>"(2*3)+(2*4)+(2*5)+(2*6) = 6+8+10+12 = 36"</returns>
+    /// </example>
+    string MultiplicationTableSum(int factor, int start, int end);
     #endregion
   }
 }

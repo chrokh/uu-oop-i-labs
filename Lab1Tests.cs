@@ -9,27 +9,44 @@ namespace OOP1Labs
     public class L1_01_01_Add : Lab1TestBase
     {
       [Test]
-      public void Add_LowNumbers()
+      [TestCase(1, 0)]
+      [TestCase(0, 1)]
+      [TestCase(1, 1)]
+      [TestCase(2, 4)]
+      [TestCase(105,   200)]
+      [TestCase(10480, 20020)]
+      public void Add_PositiveNumbers_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(3, lab.Add(1, 2));
+        Assert.AreEqual((x+y), lab.Add(x, y));
+      }
+        
+
+      [Test]
+      public void Add_Zeroes_ReturnsZero()
+      {
+        Assert.AreEqual (0, lab.Add(0, 0));
       }
 
       [Test]
-      public void Add_HighNumbers()
+      [TestCase(-1, 0)]
+      [TestCase(-2, 2)]
+      [TestCase(-5, 10)]
+      [TestCase(-1040,  2135)]
+      [TestCase(-32454, 23)]
+      public void Add_LeftNegativeNumber_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(30500, lab.Add(10480, 20020));
+        Assert.AreEqual((x+y), lab.Add(x, y));
       }
 
       [Test]
-      public void Add_OneZero()
+      [TestCase(0,  -1)]
+      [TestCase(2,  -2)]
+      [TestCase(10, -5)]
+      [TestCase(2135, -1040)]
+      [TestCase(23,   -32454)]
+      public void Add_LeftNegativeNumber_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual (1, lab.Add(1, 0));
-      }
-
-      [Test]
-      public void Add_NegativeNumbers()
-      {
-        Assert.AreEqual(-2, lab.Add(2, -4));
+        Assert.AreEqual((x+y), lab.Add(x, y));
       }
     }
     
@@ -1186,7 +1203,41 @@ namespace OOP1Labs
       {
         Assert.IsFalse(lab.IsTheBathReady(hasWater, degrees));
       }
+    }
 
+    [TestFixture]
+    public class L1_08_04_MultiplicationTableSum : Lab1TestBase
+    {
+      [Test]
+      [TestCase(0,0,0)]
+      [TestCase(1,0,0)]
+      [TestCase(-1,1,1)]
+      [TestCase(0,12,12)]
+      [TestCase(0,-3,-3)]
+      [TestCase(0,15,15)]
+      [TestCase(0,4507,4507)]
+      public void MultiplicationTableSum_ZeroSteps_ReturnsJustZero(int factor, int start, int end)
+      {
+        Assert.AreEqual("0", lab.MultiplicationTableSum(factor, start, end));
+      }
+
+      [Test]
+      [TestCase(2,3,6)]
+      public void MultiplicationTableSum_SecondTableFourSteps_CalculatesTo36(int factor, int start, int end)
+      {
+        string expected = "(2*3)+(2*4)+(2*5)+(2*6) = 6+8+10+12 = 36";
+        string actual   = lab.MultiplicationTableSum(factor, start, end);
+        Assert.AreEqual(expected, actual);
+      }
+
+
+      [Test]
+      [TestCase(1,0,1)]
+      public void MultiplicationTableSum_Trivial_CalculatesTo1(int factor, int start, int end)
+      {
+        string actual = lab.MultiplicationTableSum(1, 0, 1);
+        Assert.AreEqual("(1*0)+(1*1) = 0+1 = 1", actual);
+      }
     }
   }
 
