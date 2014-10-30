@@ -1013,54 +1013,59 @@ namespace OOP1Labs
     public class L1_08_01_RequestPony : Lab1TestBase
     {
       [Test]
-      public void RequestPony_TooYoung_IsDenied()
+      [TestCase(11, 66)]
+      [TestCase(8,  65)]
+      [TestCase(5,  50)]
+      [TestCase(2,  30)]
+      [TestCase(0,  29)]
+      public void RequestPony_TooYoung_IsDenied(int age, int weight)
       {
-        Assert.AreEqual("Too young to compete.", lab.RequestPony(11, 66));
-        Assert.AreEqual("Too young to compete.", lab.RequestPony(8,  65));
-        Assert.AreEqual("Too young to compete.", lab.RequestPony(5,  50));
-        Assert.AreEqual("Too young to compete.", lab.RequestPony(2,  30));
-        Assert.AreEqual("Too young to compete.", lab.RequestPony(0, 29));
+        Assert.AreEqual("Too young to compete.", lab.RequestPony(age, weight));
       }
 
       [Test]
-      public void RequestPony_WeightUnder31_GetsAPony()
+      [TestCase(12, 20)]
+      [TestCase(22, 21)]
+      [TestCase(34, 23)]
+      [TestCase(42, 24)]
+      [TestCase(56, 29)]
+      [TestCase(72, 30)]
+      public void RequestPony_WeightUnder31_GetsAPony(int age, int weight)
       {
-        Assert.AreEqual("Class A pony", lab.RequestPony(12, 20));
-        Assert.AreEqual("Class A pony", lab.RequestPony(22, 21));
-        Assert.AreEqual("Class A pony", lab.RequestPony(34, 23));
-        Assert.AreEqual("Class A pony", lab.RequestPony(42, 24));
-        Assert.AreEqual("Class A pony", lab.RequestPony(56, 29));
-        Assert.AreEqual("Class A pony", lab.RequestPony(72, 30));
+        Assert.AreEqual("Class A pony", lab.RequestPony(age, weight));
       }
 
       [Test]
-      public void RequestPony_WeightUnder51_GetsBPony()
+      [TestCase(12, 31)]
+      [TestCase(22, 32)]
+      [TestCase(34, 45)]
+      [TestCase(56, 49)]
+      [TestCase(72, 50)]
+      public void RequestPony_WeightUnder51_GetsBPony(int age, int weight)
       {
-        Assert.AreEqual("Class B pony", lab.RequestPony(12, 31));
-        Assert.AreEqual("Class B pony", lab.RequestPony(22, 32));
-        Assert.AreEqual("Class B pony", lab.RequestPony(34, 45));
-        Assert.AreEqual("Class B pony", lab.RequestPony(56, 49));
-        Assert.AreEqual("Class B pony", lab.RequestPony(72, 50));
+        Assert.AreEqual("Class B pony", lab.RequestPony(age, weight));
       }
 
       [Test]
-      public void RequestPony_WeightUnder66_GetsBPony()
+      [TestCase(12, 51)]
+      [TestCase(22, 52)]
+      [TestCase(34, 59)]
+      [TestCase(56, 64)]
+      [TestCase(72, 65)]
+      public void RequestPony_WeightUnder66_GetsBPony(int age, int weight)
       {
-        Assert.AreEqual("Class C pony", lab.RequestPony(12, 51));
-        Assert.AreEqual("Class C pony", lab.RequestPony(22, 52));
-        Assert.AreEqual("Class C pony", lab.RequestPony(34, 59));
-        Assert.AreEqual("Class C pony", lab.RequestPony(56, 64));
-        Assert.AreEqual("Class C pony", lab.RequestPony(72, 65));
+        Assert.AreEqual("Class C pony", lab.RequestPony(age, weight));
       }
 
       [Test]
-      public void RequestPony_WeightOver65_GetsBPony()
+      [TestCase(12, 66)]
+      [TestCase(22, 67)]
+      [TestCase(34, 78)]
+      [TestCase(56, 104)]
+      [TestCase(72, 18070)]
+      public void RequestPony_WeightOver65_GetsBPony(int age, int weight)
       {
-        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(12, 66));
-        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(22, 67));
-        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(34, 78));
-        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(56, 104));
-        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(72, 18070));
+        Assert.AreEqual("No ponies available for the given weight class.", lab.RequestPony(age, weight));
       }
     }
 
