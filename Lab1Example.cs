@@ -139,6 +139,11 @@ namespace OOP1Labs
       throw new NotImplementedException();
     }
 
+    public string RepeatString(string text, int times)
+    {
+      throw new NotImplementedException();
+    }
+    
     public string MultiplicationTableSum(int factor, int start, int end)
     {
       throw new NotImplementedException();

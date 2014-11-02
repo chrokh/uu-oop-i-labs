@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace OOP1Labs
-{
+{ 
   namespace L1_01_Arithmetic
   {
     [TestFixture]
@@ -1209,9 +1210,43 @@ namespace OOP1Labs
         Assert.IsFalse(LabFactory.Lab1().IsTheBathReady(hasWater, degrees));
       }
     }
+  }
+
+  namespace L1_09_Iteration
+  {
+    [TestFixture]
+    public class L1_09_01_RepeatString
+    { 
+      [Test]
+      [TestCase("", 0)]
+      [TestCase("", 1)]
+      [TestCase("", 4000)]
+      [TestCase("", -12)]
+      public void RepeatString_NoStringSomeOrNoTimes_ReturnsNoString(string text, int times){
+        Assert.AreEqual("", LabFactory.Lab1().RepeatString(text, times));
+      }
+
+      [Test]
+      [TestCase("Only once please ", 1)]
+      [TestCase("someone telling someone about ", 3)]
+      [TestCase("a", 50)]
+      public void RepeatString_SomeStringSomeTimes_ReturnsSameStringRepeated(string text, int times){
+        string expected = String.Join("", Enumerable.Repeat(text, times));
+        string actual = LabFactory.Lab1().RepeatString(text, times);
+        Assert.AreEqual(expected, actual);
+      }
+
+      [Test]
+      [TestCase("foo", 0)]
+      [TestCase("foo", -1)]
+      [TestCase("baz", -152)]
+      public void RepeatString_SomeStringNoOrNegativeTimes_ReturnsNoString(string text, int times){
+        Assert.AreEqual("", LabFactory.Lab1().RepeatString(text, times));
+      }
+    }
 
     [TestFixture]
-    public class L1_08_04_MultiplicationTableSum
+    public class L1_09_02_MultiplicationTableSum
     {
       [Test]
       [TestCase(0,0,0)]
