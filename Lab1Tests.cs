@@ -731,136 +731,78 @@ namespace OOP1Labs
     public class L1_04_04_IsGreater
     {
       [Test]
-      public void IsGreater_LeftGreatest_IsTrue()
+      [TestCase(2,      1)]
+      [TestCase(18000,  600)]
+      [TestCase(909090, 909089)]
+      [TestCase(0,      -1)]
+      [TestCase(-20,    -50)]
+      public void IsGreater_LeftGreatest_IsTrue(int x, int y)
       {
-        Assert.IsTrue(LabFactory.Lab1().IsGreater(2, 1));
-        Assert.IsTrue(LabFactory.Lab1().IsGreater(18000, 600));
-        Assert.IsTrue(LabFactory.Lab1().IsGreater(909090, 909089));
-        Assert.IsTrue(LabFactory.Lab1().IsGreater(0, -1));
-        Assert.IsTrue(LabFactory.Lab1().IsGreater(-20, -50));
+        Assert.IsTrue(LabFactory.Lab1().IsGreater(x, y));
       }
 
       [Test]
-      public void IsGreater_RightGreatest_IsFalse()
+      [TestCase(1,       2)]
+      [TestCase(500,     900)]
+      [TestCase(707070,  707071)]
+      [TestCase(-1,      0)]
+      [TestCase(-140,  -40)]
+      public void IsGreater_RightGreatest_IsFalse(int x, int y)
       {
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(1, 2));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(500, 900));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(707070, 707071));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(-1, 0));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(-140, -40));
+        Assert.IsFalse(LabFactory.Lab1().IsGreater(x, y));
       }
 
       [Test]
-      public void IsGreater_Equal_IsFalse()
+      [TestCase(0,      0)]
+      [TestCase(1,      1)]
+      [TestCase(808080, 808080)]
+      [TestCase(-1507, -1507)]
+      public void IsGreater_Equal_IsFalse(int x, int y)
       {
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(0, 0));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(1, 1));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(808080, 808080));
-        Assert.IsFalse(LabFactory.Lab1().IsGreater(-1507, -1507));
+        Assert.IsFalse(LabFactory.Lab1().IsGreater(x, y));
       }
     }
   }
 
-  namespace L1_05_Booleans
+  public class L1_05_Booleans
   {
-    [TestFixture]
-    public class L1_05_01_And
+    [Test]
+    [TestCase(true,  true,  Result=true)]
+    [TestCase(true,  false, Result=false)]
+    [TestCase(false, true,  Result=false)]
+    [TestCase(false, false, Result=false)]
+    public bool And(bool a, bool b)
     {
-      [Test]
-      public void And_TrueWhenTrueTrue()
-      {
-        Assert.IsTrue(LabFactory.Lab1().And(true, true));
-      }
-
-      [Test]
-      public void And_FalseWhenTrueFalse()
-      {
-        Assert.IsFalse(LabFactory.Lab1().And(true, false));
-      }
-
-      [Test]
-      public void And_FalseWhenFalseTrue()
-      {
-        Assert.IsFalse(LabFactory.Lab1().And(false, true));
-      }
-
-      [Test]
-      public void And_FalseWhenFalseFalse()
-      {
-        Assert.IsFalse(LabFactory.Lab1().And(false, false));
-      }
+      return LabFactory.Lab1().And(a, b);
     }
 
-    [TestFixture]
-    public class L1_05_02_Or
+    [Test]
+    [TestCase(true, true,   Result=true)]
+    [TestCase(true, false,  Result=true)]
+    [TestCase(false, true,  Result=true)]
+    [TestCase(false, false, Result=false)]
+    public bool Or(bool a, bool b)
     {
-      [Test]
-      public void Or_TrueWhenTrueTrue()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Or(true, true));
-      }
-
-      [Test]
-      public void Or_TrueWhenTrueFalse()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Or(true, false));
-      }
-
-      [Test]
-      public void Or_TrueWhenFalseTrue()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Or(false, true));
-      }
-
-      [Test]
-      public void Or_FalseWhenFalseFalse()
-      {
-        Assert.IsFalse(LabFactory.Lab1().Or(false, false));
-      }
+      return LabFactory.Lab1().Or(a, b);
     }
 
-    [TestFixture]
-    public class L1_05_03_Xor
+
+    [Test]
+    [TestCase(true, true,   Result=false)]
+    [TestCase(true, false,  Result=true)]
+    [TestCase(false, true,  Result=true)]
+    [TestCase(false, false, Result=false)]
+    public bool Xor(bool a, bool b)
     {
-      [Test]
-      public void Xor_FalseWhenTrueTrue()
-      {
-        Assert.IsFalse(LabFactory.Lab1().Xor(true, true));
-      }
-
-      [Test]
-      public void Xor_TrueWhenTrueFalse()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Xor(true, false));
-      }
-
-      [Test]
-      public void Xor_TrueWhenFalseTrue()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Xor(false, true));
-      }
-
-      [Test]
-      public void Xor_FalseWhenFalseFalse()
-      {
-        Assert.IsFalse(LabFactory.Lab1().Xor(false, false));
-      }
+      return LabFactory.Lab1().Xor(a, b);
     }
 
-    [TestFixture]
-    public class L1_05_04_Not
+    [Test]
+    [TestCase(false, Result=true)]
+    [TestCase(true,  Result=false)]
+    public bool Not(bool a)
     {
-      [Test]
-      public void Not_TrueWhenFalse()
-      {
-        Assert.IsTrue(LabFactory.Lab1().Not(false));
-      }
-
-      [Test]
-      public void Not_FalseWhenTrue()
-      {
-        Assert.IsFalse(LabFactory.Lab1().Not(true));
-      }
+      return LabFactory.Lab1().Not(a);
     }
   }
 
@@ -870,23 +812,26 @@ namespace OOP1Labs
     public class L1_06_01_IntToString
     {
       [Test]
-      public void IntToString_ConvertsNumbersToStrings()
+      [TestCase(150430, Result="150430")]
+      [TestCase(32,     Result="32")]
+      public string IntToString_ConvertsPositiveNumbersToStrings(int number)
       {
-        Assert.AreEqual("150430", LabFactory.Lab1().IntToString(150430));
-        Assert.AreEqual("32", LabFactory.Lab1().IntToString(32));
+        return LabFactory.Lab1().IntToString(number);
       }
 
       [Test]
-      public void IntToString_AllowsZeroToBeConverted()
+      [TestCase(-12,   Result="-12")]
+      [TestCase(-4045, Result="-4045")]
+      public string IntToString_PrependsDashToNegativeNumbers(int number)
       {
-        Assert.AreEqual("0", LabFactory.Lab1().IntToString(0));
+        return LabFactory.Lab1().IntToString(number);
       }
 
       [Test]
-      public void IntToString_PrependsDashToNegativeNumbers()
+      [TestCase(0)]
+      public void IntToString_AllowsZeroToBeConverted(int number)
       {
-        Assert.AreEqual("-12", LabFactory.Lab1().IntToString(-12));
-        Assert.AreEqual("-4045", LabFactory.Lab1().IntToString(-4045));
+        Assert.AreEqual("0", LabFactory.Lab1().IntToString(number));
       }
     }
 
@@ -894,44 +839,49 @@ namespace OOP1Labs
     public class L1_06_02_StringToInt
     {
       [Test]
-      public void StringToInt_ConvertsStringOfAllNumbersToStrings()
+      [TestCase("3",     Result=3)]
+      [TestCase("100",   Result=100)]
+      [TestCase("10430", Result=10430)]
+      public int StringToInt_StringOfAllNumbers_ConvertsToStrings(string number)
       {
-        Assert.AreEqual(3, LabFactory.Lab1().StringToInt("3"));
-        Assert.AreEqual(100, LabFactory.Lab1().StringToInt("100"));
-        Assert.AreEqual(10430, LabFactory.Lab1().StringToInt("10430"));
+        return LabFactory.Lab1().StringToInt(number);
       }
 
       [Test]
-      public void StringToInt_RemovesTrailingZeroes()
+      [TestCase("010",              Result = 10)]
+      [TestCase("0000000000100000", Result = 100000)]
+      [TestCase("000100400",        Result = 100400)]
+      public int StringToInt_TrailingZeroes_AreRemoved(string number)
       {
-        Assert.AreEqual(10, LabFactory.Lab1().StringToInt("010"));
-        Assert.AreEqual(100000, LabFactory.Lab1().StringToInt("0000000000100000"));
-        Assert.AreEqual(100400, LabFactory.Lab1().StringToInt("000100400"));
+        return LabFactory.Lab1().StringToInt(number);
       }
 
       [Test]
-      public void StringToInt_DashAsFirstCharacterCreatesNegativeNumbers()
+      [TestCase("-4",   Result=-4)]
+      [TestCase("-104", Result=-104)]
+      public int StringToInt_DashAsFirstCharacter_NegativeNumbers(string number)
       {
-        Assert.AreEqual(-4, LabFactory.Lab1().StringToInt("-4"));
-        Assert.AreEqual(-104, LabFactory.Lab1().StringToInt("-104"));
-      }
-
-      [Test]
-      [ExpectedException]
-      public void StringToInt_ThrowsExceptionOnNonNumbers()
-      {
-        LabFactory.Lab1().StringToInt("123hello");
-        LabFactory.Lab1().StringToInt("a43");
-        LabFactory.Lab1().StringToInt("123-45");
-        LabFactory.Lab1().StringToInt("#123");
+        return LabFactory.Lab1().StringToInt(number);
       }
 
       [Test]
       [ExpectedException]
-      public void StringToInt_ThrowsExceptionOnEmptyOrNull()
+      [TestCase("123hello")]
+      [TestCase("a43")]
+      [TestCase("123-45")]
+      [TestCase("#123")]
+      public void StringToInt_NonNumbers_ThrowsException(string number)
       {
-        LabFactory.Lab1().StringToInt("");
-        LabFactory.Lab1().StringToInt(null);
+        LabFactory.Lab1().StringToInt(number);
+      }
+
+      [Test]
+      [ExpectedException]
+      [TestCase("")]
+      [TestCase(" ")]
+      public void StringToInt_Empty_ThrowsException(string number)
+      {
+        LabFactory.Lab1().StringToInt(number);
       }
     }
   }
