@@ -100,10 +100,10 @@ namespace OOP1Labs
       }
 
       [TestCase(-1, -1)]
-      [TestCase(-10 -2)]
+      [TestCase(-10, -2)]
       [TestCase(-2, -10)]
-      [TestCase(-8090 -4050)]
-      [TestCase(-4050 -8090)]
+      [TestCase(-8090, -4050)]
+      [TestCase(-4050, -8090)]
       public void Subtract_NegativeXandY_ReturnsSum(int x, int y)
       {
         Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
@@ -343,45 +343,45 @@ namespace OOP1Labs
     public class L1_03_04_DivideAndTruncate
     {
       [Test]
-      public void DivideAndTruncate_LowEven()
+      [TestCase(4,2)]
+      [TestCase(432, 8)]
+      public void DivideAndTruncate_Even(double n, double d)
       {
-        Assert.AreEqual(2, LabFactory.Lab1().DivideAndTruncate(4.0, 2.0));
+        Assert.AreEqual((int)(n/d), LabFactory.Lab1().DivideAndTruncate(n,d));
       }
 
       [Test]
-      public void DivideAndTruncate_LowUneven()
+      [TestCase(4.5, 2.4)]
+      [TestCase(425.4, 8)]
+      [TestCase(9.9, 2)]
+      public void DivideAndTruncate_Uneven(double n, double d)
       {
-        Assert.AreEqual(1, LabFactory.Lab1().DivideAndTruncate(4.5, 2.4));
+        Assert.AreEqual((int)(n/d), LabFactory.Lab1().DivideAndTruncate(n,d));
       }
 
       [Test]
-      public void DivideAndTruncate_HighEven()
+      [TestCase(9.25, -2.5)]
+      [TestCase(9.25, -8.5)]
+      public void DivideAndTruncate_SecondNegativeUneven(double n, double d)
       {
-        Assert.AreEqual(54, LabFactory.Lab1().DivideAndTruncate(432, 8));
+        Assert.AreEqual((int)(n/d), LabFactory.Lab1().DivideAndTruncate(n,d));
       }
 
       [Test]
-      public void DivideAndTruncate_HighUneven()
+      [TestCase(-1.5,  2.5)]
+      [TestCase(-11.5, 2.5)]
+      public void DivideAndTruncate_FirstNegativeUneven(double n, double d)
       {
-        Assert.AreEqual(53, LabFactory.Lab1().DivideAndTruncate(425.4, 8.0));
+        Assert.AreEqual((int)(n/d), LabFactory.Lab1().DivideAndTruncate(n,d));
       }
 
       [Test]
-      public void DivideAndTruncate_SecondNegativeUneven()
+      [TestCase(2.5,  8.0)]
+      [TestCase(-3,   12.0)]
+      [TestCase(0.25, 0.26)]
+      public void DivideAndTruncate_LargerDenominatorUneven(double n, double d)
       {
-        Assert.AreEqual(-3, LabFactory.Lab1().DivideAndTruncate(9.25, -2.5));
-      }
-
-      [Test]
-      public void DivideAndTruncate_FirstNegativeUneven()
-      {
-        Assert.AreEqual(-4, LabFactory.Lab1().DivideAndTruncate(-11.5, 2.5));
-      }
-
-      [Test]
-      public void DivideAndTruncate_LargerDenominatorUneven()
-      {
-        Assert.AreEqual(0, LabFactory.Lab1().DivideAndTruncate(2.5, 8.0));
+        Assert.AreEqual((int)(n/d), LabFactory.Lab1().DivideAndTruncate(n,d));
       }
     }
 
@@ -389,36 +389,40 @@ namespace OOP1Labs
     public class L1_03_05_DivideAndRound
     {
       [Test]
-      public void DivideAndRound_Even_DoesNotRound()
+      [TestCase(4,   2)]
+      [TestCase(100, 25)]
+      [TestCase(9050, 5)]
+      public void DivideAndRound_Even_DoesNotRound(double n, double d)
       {
-        Assert.AreEqual(2, LabFactory.Lab1().DivideAndRound(4, 2));
-        Assert.AreEqual(4, LabFactory.Lab1().DivideAndRound(100, 25));
-        Assert.AreEqual(1810, LabFactory.Lab1().DivideAndRound(9050, 5));
+        Assert.AreEqual((n/d), LabFactory.Lab1().DivideAndRound(n, d));
       }
 
       [Test]
-      public void DivideAndRound_QuotientAbovePointFive_RoundsUp()
+      [TestCase(1,   1.9)]
+      [TestCase(4.5, 2.4)]
+      [TestCase(-1,  3)]
+      public void DivideAndRound_QuotientAbovePointFive_RoundsUp(double n, double d)
       {
-        Assert.AreEqual(2, LabFactory.Lab1().DivideAndRound(4.5, 2.4));
-        Assert.AreEqual(53, LabFactory.Lab1().DivideAndRound(422.0, 8.0));
-        Assert.AreEqual(-3, LabFactory.Lab1().DivideAndRound(9.25, -2.5));
+        Assert.AreEqual(Math.Ceiling(n/d), LabFactory.Lab1().DivideAndRound(n, d));
       }
 
       [Test]
-      public void DivideAndRound_QuotientBelowPointFive_RoundsDown()
+      [TestCase(1,     2.5)]
+      [TestCase(2.5,   8.0)]
+      [TestCase(-1,    1.5)]
+      public void DivideAndRound_QuotientBelowPointFive_RoundsDown(double n, double d)
       {
-        Assert.AreEqual(53, LabFactory.Lab1().DivideAndRound(425.4, 8.0));
-        Assert.AreEqual(-4, LabFactory.Lab1().DivideAndRound(-11.5, 2.5));
-        Assert.AreEqual(0, LabFactory.Lab1().DivideAndRound(2.5, 8.0));
+        Assert.AreEqual(Math.Floor(n/d), LabFactory.Lab1().DivideAndRound(n, d));
       }
 
       [Test]
-      public void DivideAndRound_QuotientAtPointFive_RoundsUp()
+      [TestCase(25,   10)]
+      [TestCase(1086, 12)]
+      [TestCase(1,    2)]
+      [TestCase(-71, -2)]
+      public void DivideAndRound_QuotientAtPointFive_RoundsUp(double n, double d)
       {
-        Assert.AreEqual(3, LabFactory.Lab1().DivideAndRound(25, 10));
-        Assert.AreEqual(91, LabFactory.Lab1().DivideAndRound(1086, 12));
-        Assert.AreEqual(1, LabFactory.Lab1().DivideAndRound(1, 2));
-        Assert.AreEqual(36, LabFactory.Lab1().DivideAndRound(-71, -2));
+        Assert.AreEqual(Math.Ceiling(n/d), LabFactory.Lab1().DivideAndRound(n, d));
       }
     }
 
