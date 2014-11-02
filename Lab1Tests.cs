@@ -430,39 +430,44 @@ namespace OOP1Labs
     public class L1_04_06_DivideWithRemainder
     {
       [Test]
-      public void DivideWithRemainder_Even()
+      [TestCase(4,   2, Result="4 divided by 2 gives 2, remainder 0.")]
+      [TestCase(424, 8, Result="424 divided by 8 gives 53, remainder 0.")]
+      public string DivideWithRemainder_Even(int n, int d)
       {
-        Assert.AreEqual("4 divided by 2 gives 2, remainder 0.", LabFactory.Lab1().DivideWithRemainder(4, 2));
-        Assert.AreEqual("424 divided by 8 gives 53, remainder 0.", LabFactory.Lab1().DivideWithRemainder(424, 8));
+        return LabFactory.Lab1().DivideWithRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithRemainder_Uneven()
+      [TestCase(5,   2, Result="5 divided by 2 gives 2, remainder 1.")]
+      [TestCase(422, 8, Result="422 divided by 8 gives 52, remainder 6.")]
+      public string DivideWithRemainder_Uneven(int n, int d)
       {
-        Assert.AreEqual("5 divided by 2 gives 2, remainder 1.", LabFactory.Lab1().DivideWithRemainder(5, 2));
-        Assert.AreEqual("422 divided by 8 gives 52, remainder 6.", LabFactory.Lab1().DivideWithRemainder(422, 8));
+        return LabFactory.Lab1().DivideWithRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithRemainder_SecondNegativeUneven()
+      [TestCase(9,   -2, Result="9 divided by -2 gives -4, remainder 1.")]
+      [TestCase(150, -4, Result="150 divided by -4 gives -37, remainder 2.")]
+      public string DivideWithRemainder_SecondNegativeUneven(int n, int d)
       {
-        Assert.AreEqual("9 divided by -2 gives -4, remainder 1.", LabFactory.Lab1().DivideWithRemainder(9, -2));
-        Assert.AreEqual("150 divided by -4 gives -37, remainder 2.", LabFactory.Lab1().DivideWithRemainder(150, -4));
+        return LabFactory.Lab1().DivideWithRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithRemainder_FirstNegativeUneven()
+      [TestCase(-11,  3, Result="-11 divided by 3 gives -3, remainder -2.")]
+      [TestCase(-160, 3, Result="-160 divided by 3 gives -53, remainder -1.")]
+      public string DivideWithRemainder_FirstNegativeUneven(int n, int d)
       {
-        Assert.AreEqual("-11 divided by 3 gives -3, remainder -2.", LabFactory.Lab1().DivideWithRemainder(-11, 3));
-        Assert.AreEqual("-160 divided by 3 gives -53, remainder -1.", LabFactory.Lab1().DivideWithRemainder(-160, 3));
+        return LabFactory.Lab1().DivideWithRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithRemainder_LargerDenominatorUneven()
+      [TestCase(2,   8,   Result="2 divided by 8 gives 0, remainder 2.")]
+      [TestCase(200, 750, Result="200 divided by 750 gives 0, remainder 200.")]
+      [TestCase(-10, 3,   Result="-10 divided by 3 gives -3, remainder -1.")]
+      public string DivideWithRemainder_LargerDenominatorUneven(int n, int d)
       {
-        Assert.AreEqual("2 divided by 8 gives 0, remainder 2.", LabFactory.Lab1().DivideWithRemainder(2, 8));
-        Assert.AreEqual("200 divided by 750 gives 0, remainder 200.", LabFactory.Lab1().DivideWithRemainder(200, 750));
-        Assert.AreEqual("-10 divided by 3 gives -3, remainder -1.", LabFactory.Lab1().DivideWithRemainder(-10, 3));
+        return LabFactory.Lab1().DivideWithRemainder(n, d);
       }
     }
 
@@ -470,73 +475,59 @@ namespace OOP1Labs
     public class L1_04_07_DivideWithAbsoluteRemainder
     {
       [Test]
-      public void DivideWithAbsoluteRemainder_Even()
+      [TestCase(4,   2, Result="4 divided by 2 gives 2, remainder 0.")]
+      [TestCase(424, 8, Result="424 divided by 8 gives 53, remainder 0.")]
+      public string DivideWithAbsoluteRemainder_Even(int n, int d)
       {
-        Assert.AreEqual("4 divided by 2 gives 2, remainder 0.", LabFactory.Lab1().DivideWithAbsoluteRemainder(4, 2));
-        Assert.AreEqual("424 divided by 8 gives 53, remainder 0.", LabFactory.Lab1().DivideWithAbsoluteRemainder(424, 8));
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithAbsoluteRemainder_Uneven()
+      [TestCase(5,   2,  Result="5 divided by 2 gives 2, remainder 1.")]
+      [TestCase(9, -2, Result="9 divided by -2 gives -4, remainder 1.")]
+      [TestCase(150, -4, Result="150 divided by -4 gives -37, remainder 2.")]
+      [TestCase(434, 8,  Result="434 divided by 8 gives 54, remainder 2.")]
+      public string DivideWithAbsoluteRemainder_Uneven_NGreaterThanD_PositiveRemainder(int n, int d)
       {
-        Assert.AreEqual("5 divided by 2 gives 2, remainder 1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(5, 2));
-        Assert.AreEqual("434 divided by 8 gives 54, remainder 2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(434, 8));
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithAbsoluteRemainder_Uneven_RequiringAbsolute()
+      [TestCase(8,    3, Result="8 divided by 3 gives 3, remainder -1.")]
+      [TestCase(422,  8, Result="422 divided by 8 gives 53, remainder -2.")]
+      [TestCase(13,  -5, Result="13 divided by -5 gives -3, remainder -2.")]
+      [TestCase(151, -4, Result="151 divided by -4 gives -38, remainder -1.")]
+      public string DivideWithAbsoluteRemainder_Uneven_NGreaterThanD_NegativeRemainder(int n, int d)
       {
-        Assert.AreEqual("8 divided by 3 gives 3, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(8, 3));
-        Assert.AreEqual("422 divided by 8 gives 53, remainder -2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(422, 8));
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithAbsoluteRemainder_SecondNegativeUneven()
+      [TestCase(2,    8,   Result="2 divided by 8 gives 0, remainder 2.")]
+      [TestCase(-11,  3,   Result="-11 divided by 3 gives -4, remainder 1.")]
+      [TestCase(-160, 90,  Result="-160 divided by 90 gives -2, remainder 20.")]
+      [TestCase(200,  750, Result="200 divided by 750 gives 0, remainder 200.")]
+      public string DivideWithAbsoluteRemainder_Uneven_NSmallerThanD_PositiveRemainder(int n, int d)
       {
-        Assert.AreEqual("9 divided by -2 gives -4, remainder 1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(9, -2));
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithAbsoluteRemainder_EqualDistanceBetweenNegativeAndPositiveRemainder_ReturnsPositive()
+      [TestCase(-10,  3, Result="-10 divided by 3 gives -3, remainder -1.")]
+      [TestCase(-160, 3, Result="-160 divided by 3 gives -53, remainder -1.")]
+      public string DivideWithAbsoluteRemainder_Uneven_NSmallerThanD_NegativeRemainder(int n, int d)
       {
-        Assert.AreEqual("150 divided by -4 gives -37, remainder 2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(150, -4));
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
 
       [Test]
-      public void DivideWithAbsoluteRemainder_SecondNegativeUneven_RequiringAbsolute()
+      [TestCase(2, 8,     Result="2 divided by 8 gives 0, remainder 2.")]
+      [TestCase(200, 750, Result="200 divided by 750 gives 0, remainder 200.")]
+      [TestCase(-10, 3,   Result="-10 divided by 3 gives -3, remainder -1.")]
+      public string DivideWithAbsoluteRemainder_EqualDistanceBetweenNegativeAndPositiveRemainder_ReturnsPositive(int n, int d)
       {
-        Assert.AreEqual("13 divided by -5 gives -3, remainder -2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(13, -5));
-        Assert.AreEqual("151 divided by -4 gives -38, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(151, -4));
-      }
-
-      [Test]
-      public void DivideWithAbsoluteRemainder_FirstNegativeUneven()
-      {
-        Assert.AreEqual("-10 divided by 3 gives -3, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-10, 3));
-        Assert.AreEqual("-160 divided by 3 gives -53, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-160, 3));
-      }
-
-      [Test]
-      public void DivideWithAbsoluteRemainder_FirstNegativeUneven_RequiringAbsolute()
-      {
-        Assert.AreEqual("-11 divided by 3 gives -4, remainder 1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-11, 3));
-        Assert.AreEqual("-160 divided by 90 gives -2, remainder 20.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-160, 90));
-      }
-
-      [Test]
-      public void DivideWithAbsoluteRemainder_LargerDenominatorUneven()
-      {
-        Assert.AreEqual("2 divided by 8 gives 0, remainder 2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(2, 8));
-        Assert.AreEqual("200 divided by 750 gives 0, remainder 200.", LabFactory.Lab1().DivideWithAbsoluteRemainder(200, 750));
-        Assert.AreEqual("-10 divided by 3 gives -3, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-10, 3));
-      }
-
-      [Test]
-      public void DivideWithAbsoluteRemainder_LargerDenominatorUneven_RequiringAbsolute()
-      {
-        Assert.AreEqual("2 divided by 8 gives 0, remainder 2.", LabFactory.Lab1().DivideWithAbsoluteRemainder(2, 8));
-        Assert.AreEqual("200 divided by 750 gives 0, remainder 200.", LabFactory.Lab1().DivideWithAbsoluteRemainder(200, 750));
-        Assert.AreEqual("-10 divided by 3 gives -3, remainder -1.", LabFactory.Lab1().DivideWithAbsoluteRemainder(-10, 3));
+        // TODO: Duplicated tests?
+        return LabFactory.Lab1().DivideWithAbsoluteRemainder(n, d);
       }
     }
   }
@@ -547,39 +538,44 @@ namespace OOP1Labs
     public class L1_04_01_Greatest
     {  
       [Test]
-      public void Greatest_Left()
+      [TestCase(1,    0,   Result=1)]
+      [TestCase(2,    0,   Result=2)]
+      [TestCase(14,   12,  Result=14)]
+      [TestCase(4050, 3,   Result=4050)]
+      [TestCase(0,   -1,   Result=0)]
+      [TestCase(1,   -1,   Result=1)]
+      [TestCase(12, -12,   Result=12)]
+      [TestCase(-1,  -2,   Result=-1)]
+      [TestCase(-3,  -13,  Result=-3)]
+      public int Greatest_Left(int x, int y)
       {
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(4, 3));
+        return LabFactory.Lab1().Greatest(x, y);
       }
 
       [Test]
-      public void Greatest_Right()
+      [TestCase(0,   1,    Result=1)]
+      [TestCase(0,   2,    Result=2)]
+      [TestCase(12,  14,   Result=14)]
+      [TestCase(3,   4050, Result=4050)]
+      [TestCase(-1,  0,    Result=0)]
+      [TestCase(-1,  1,    Result=1)]
+      [TestCase(-12, 12,   Result=12)]
+      [TestCase(-2,  -1,   Result=-1)]
+      [TestCase(-13, -3,   Result=-3)]
+      public int Greatest_Right(int x, int y)
       {
-        Assert.AreEqual(8, LabFactory.Lab1().Greatest(4, 8));
+        return LabFactory.Lab1().Greatest(x, y);
       }
 
       [Test]
-      public void Greatest_Equal()
+      [TestCase(0,    0,     Result=0)]
+      [TestCase(1,    1,     Result=1)]
+      [TestCase(4450, 4450,  Result=4450)]
+      [TestCase(-1,   -1,    Result=-1)]
+      [TestCase(-321, -321,  Result=-321)]
+      public int Greatest_Equal(int x, int y)
       {
-        Assert.AreEqual(5, LabFactory.Lab1().Greatest(5, 5));
-      }
-
-      [Test]
-      public void Greatest_NegativeLeft()
-      {
-        Assert.AreEqual(3, LabFactory.Lab1().Greatest(-4, 3));
-      }
-
-      [Test]
-      public void Greatest_NegativeRight()
-      {
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(4, -3));
-      }
-
-      [Test]
-      public void Greatest_Negative()
-      {
-        Assert.AreEqual(-7, LabFactory.Lab1().Greatest(-8, -7));
+        return LabFactory.Lab1().Greatest(x, y);
       }
     }
 
@@ -587,60 +583,57 @@ namespace OOP1Labs
     public class L1_04_02_GreatestOfThree
     {
       [Test]
-      public void Greatest_OfThree_Trivial()
+      [TestCase(1, 0, 0,    Result=1)]
+      [TestCase(7, 3, 5,    Result=7)]
+      [TestCase(1040000, 250000, 110000, Result=1040000)]
+      [TestCase(2,  1, -3,  Result=2)]
+      [TestCase(2,  -2, -3, Result=2)]
+      [TestCase(-1, -3, -4, Result=-1)]
+      public int Greatest_OfThree_LeftGreatest(int x, int y, int z)
       {
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1, 0, 0));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(0, 1, 0));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(0, 0, 1));
+        return LabFactory.Lab1().Greatest(x, y, z);
       }
 
       [Test]
-      public void Greatest_OfThree_Low()
+      [TestCase(0, 1, 0,    Result=1)]
+      [TestCase(5, 7, 3,    Result=7)]
+      [TestCase(110000, 1040000, 250000, Result=1040000)]
+      [TestCase(-3, 2,  1,  Result=2)]
+      [TestCase(-3, 2,  -2, Result=2)]
+      [TestCase(-4, -1, -3, Result=-1)]
+      public int Greatest_OfThree_MidGreatest(int x, int y, int z)
       {
-        Assert.AreEqual(5, LabFactory.Lab1().Greatest(4, 3, 5));
-        Assert.AreEqual(6, LabFactory.Lab1().Greatest(4, 6, 5));
-        Assert.AreEqual(7, LabFactory.Lab1().Greatest(7, 3, 5));
+        return LabFactory.Lab1().Greatest(x, y, z);
       }
 
       [Test]
-      public void Greatest_OfThree_High()
+      [TestCase(0 ,0, 1,    Result=1)]
+      [TestCase(3, 5, 7,    Result=7)]
+      [TestCase(250000, 110000, 1040000, Result=1040000)]
+      [TestCase(1,  -3, 2,  Result=2)]
+      [TestCase(-2, -3, 2,  Result=2)]
+      [TestCase(-3, -4, -1, Result=-1)]
+      public int Greatest_OfThree_RightGreatest(int x, int y, int z)
       {
-        Assert.AreEqual(1040000, LabFactory.Lab1().Greatest(1040000, 250000, 110000));
-        Assert.AreEqual(1040000, LabFactory.Lab1().Greatest(110000, 1040000, 250000));
-        Assert.AreEqual(1040000, LabFactory.Lab1().Greatest(110000, 250000, 1040000));
+        return LabFactory.Lab1().Greatest(x, y, z);
       }
 
       [Test]
-      public void Greatest_OfThree_Equal()
+      [TestCase(1, 1, 1, Result=1)]
+      [TestCase(7, 7, 7, Result=7)]
+      [TestCase(102960, 102960, 102960, Result=102960)]
+      public int Greatest_OfThree_AllEqual(int x, int y, int z)
       {
-        Assert.AreEqual(7, LabFactory.Lab1().Greatest(6, 7, 7));
-        Assert.AreEqual(8, LabFactory.Lab1().Greatest(8, 6, 8));
-        Assert.AreEqual(9, LabFactory.Lab1().Greatest(9, 9, 6));
-        Assert.AreEqual(102960, LabFactory.Lab1().Greatest(102960, 102960, 102960));
+        return LabFactory.Lab1().Greatest(x, y, z);
       }
 
       [Test]
-      public void Greatest_OfThree_Negative()
+      [TestCase(1, 8, 8, Result=8)]
+      [TestCase(8, 1, 1, Result=8)]
+      [TestCase(8, 8, 1, Result=8)]
+      public int Greatest_OfThree_TwoEqualGreatest(int x, int y, int z)
       {
-        // Double negatives
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest(-2, -2, 2));
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest(2, -2, -2));
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest(-2, 2, -2));
-
-        // Double negative different numbers
-        Assert.AreEqual(3, LabFactory.Lab1().Greatest(-1, -2, 3));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1, -2, -3));
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest(-1, 2, -3));
-
-        // Single negative
-        Assert.AreEqual(3, LabFactory.Lab1().Greatest(-1, 2, 3));
-        Assert.AreEqual(3, LabFactory.Lab1().Greatest(3, -2, 1));
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest(1, 2, -3));
-
-        // All negative
-        Assert.AreEqual(-1, LabFactory.Lab1().Greatest(-1, -2, -3));
-        Assert.AreEqual(-43, LabFactory.Lab1().Greatest(-43, -120, -20501));
-        Assert.AreEqual(-1, LabFactory.Lab1().Greatest(-1, -1230, -3));
+        return LabFactory.Lab1().Greatest(x, y, z);
       }
     }
 
@@ -648,64 +641,89 @@ namespace OOP1Labs
     public class L1_04_03_GreatestOfFour
     {
       [Test]
-      public void Greatest_OfFour_Trivial()
+      [TestCase(1, 0, 0, 0,      Result=1)]
+      [TestCase(7, 3, 5, 6,      Result=7)]
+      [TestCase(1040000, 250000, 110000, 8080, Result=1040000)]
+      [TestCase( 3,  1,  2, -3,  Result=3)]
+      [TestCase( 3,  1, -2, -3,  Result=3)]
+      [TestCase( 3, -1, -2, -3,  Result=3)]
+      [TestCase(-1, -2, -3, -4,  Result=-1)]
+      public int Greatest_OfFour_FirstGreatest(int x, int y, int z, int w)
       {
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1, 0, 0, 0));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(0, 1, 0, 0));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(0, 0, 1, 0));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(0, 0, 0, 1));
+        return LabFactory.Lab1().Greatest(x, y, z, w);
       }
 
       [Test]
-      public void Greatest_OfFour_Low()
+      [TestCase(1, 1, 0, 0,     Result=1)]
+      [TestCase(6, 7, 3, 5,     Result=7)]
+      [TestCase(1040000, 250000, 110000, 8080, Result=1040000)]
+      [TestCase(-3, 3,  1,  2,  Result=3)]
+      [TestCase(-3, 3,  1, -2,  Result=3)]
+      [TestCase(-3, 3, -1, -2,  Result=3)]
+      [TestCase(-3, 3, -1, -2,  Result=3)]
+      [TestCase(-4, -1, -2, -3, Result=-1)]
+      public int Greatest_OfFour_SecondGreatest(int x, int y, int z, int w)
       {
-        Assert.AreEqual(10, LabFactory.Lab1().Greatest(10, 3, 4, 2));
-        Assert.AreEqual(20, LabFactory.Lab1().Greatest(2, 20, 4, 3));
-        Assert.AreEqual(30, LabFactory.Lab1().Greatest(2, 3, 30, 4));
-        Assert.AreEqual(40, LabFactory.Lab1().Greatest(2, 3, 4, 40));
+        return LabFactory.Lab1().Greatest(x, y, z, w);
       }
 
       [Test]
-      public void Greatest_OfFour_High()
+      [TestCase(0, 1, 1, 0,     Result=1)]
+      [TestCase(5, 6, 7, 3,     Result=7)]
+      [TestCase(1040000, 250000, 110000, 8080, Result=1040000)]
+      [TestCase( 2, -3, 3,  1,  Result=3)]
+      [TestCase(-2, -3, 3,  1,  Result=3)]
+      [TestCase(-2, -3, 3, -1,  Result=3)]
+      [TestCase(-2, -3, 3, -1,  Result=3)]
+      [TestCase(-3, -4, -1, -2, Result=-1)]
+      public int Greatest_OfFour_ThirdGreatest(int x, int y, int z, int w)
       {
-        Assert.AreEqual(1040001, LabFactory.Lab1().Greatest(1040001, 250000, 110000, 9000));
-        Assert.AreEqual(1040002, LabFactory.Lab1().Greatest(110000, 1040002, 250000, 9000));
-        Assert.AreEqual(1040003, LabFactory.Lab1().Greatest(110000, 250000, 1040003, 9000));
-        Assert.AreEqual(1040004, LabFactory.Lab1().Greatest(110000, 250000, 9000, 1040004));
+        return LabFactory.Lab1().Greatest(x, y, z, w);
       }
 
       [Test]
-      public void Greatest_OfFour_Equal()
+      [TestCase(0, 0, 1, 1,     Result=1)]
+      [TestCase(3, 5, 6, 7,     Result=7)]
+      [TestCase(1040000, 250000, 110000, 8080, Result=1040000)]
+      [TestCase( 1,  2, -3, 3,  Result=3)]
+      [TestCase( 1, -2, -3, 3,  Result=3)]
+      [TestCase(-1, -2, -3, 3,  Result=3)]
+      [TestCase(-1, -2, -3, 3,  Result=3)]
+      [TestCase(-2, -3, -4, -1, Result=-1)]
+      public int Greatest_OfFour_FourthGreatest(int x, int y, int z, int w)
       {
-        Assert.AreEqual(6, LabFactory.Lab1().Greatest(5, 6, 6, 6));
-        Assert.AreEqual(7, LabFactory.Lab1().Greatest(7, 5, 7, 7));
-        Assert.AreEqual(8, LabFactory.Lab1().Greatest(8, 8, 5, 8));
-        Assert.AreEqual(9, LabFactory.Lab1().Greatest(9, 9, 9, 5));
-        Assert.AreEqual(1020765, LabFactory.Lab1().Greatest(1020765, 1020765, 1020765, 1020765));
+        return LabFactory.Lab1().Greatest(x, y, z, w);
+      }
+
+
+      [Test]
+      [TestCase(1, 1, 1, 1,     Result=1)]
+      [TestCase(-7, -7, -7, -7, Result=-7)]
+      [TestCase(102960, 102960, 102960, 102960, Result=102960)]
+      public int Greatest_OfThree_AllEqual(int x, int y, int z, int w)
+      {
+        return LabFactory.Lab1().Greatest(x, y, z, w);
       }
 
       [Test]
-      public void Greatest_OfFour_Negative()
+      [TestCase(1, 1, 8, 8, Result=8)]
+      [TestCase(8, 1, 1, 8, Result=8)]
+      [TestCase(8, 8, 1, 1, Result=8)]
+      [TestCase(1, 8, 8, 1, Result=8)]
+      [TestCase(1, 8, 1, 8, Result=8)]
+      public int Greatest_OfThree_TwoEqualGreatest(int x, int y, int z, int w)
       {
-        // Three negative
-        Assert.AreEqual(2, LabFactory.Lab1().Greatest( 2, -1, -2, -3));
-        Assert.AreEqual(3, LabFactory.Lab1().Greatest(-1,  3, -2, -3));
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(-1, -2,  4, -3));
-        Assert.AreEqual(5, LabFactory.Lab1().Greatest(-1, -2, -3,  5));
+        return LabFactory.Lab1().Greatest(x, y, z, w);
+      }
 
-        // Two negative
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1,  1, -1, -1));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1, -1,  1, -1));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(1, -1, -1,  1));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(-1, 1,  1, -1));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(-1, 1, -1,  1));
-        Assert.AreEqual(1, LabFactory.Lab1().Greatest(-1, -1, 1,  1));
-
-        // One negative
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(-5, 4,  4,  4));
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(4, -5,  4,  4));
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(4,  4, -5,  4));
-        Assert.AreEqual(4, LabFactory.Lab1().Greatest(4,  4,  4, -5));
+      [Test]
+      [TestCase(1, 8, 8, 8, Result=8)]
+      [TestCase(8, 1, 8, 8, Result=8)]
+      [TestCase(8, 8, 1, 8, Result=8)]
+      [TestCase(8, 8, 8, 1, Result=8)]
+      public int Greatest_OfThree_ThreeEqualGreatest(int x, int y, int z, int w)
+      {
+        return LabFactory.Lab1().Greatest(x, y, z, w);
       }
     }
 
