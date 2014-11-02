@@ -6,12 +6,12 @@ namespace OOP1Labs
   {
     public int Add (int x, int y)
     {
-      throw new NotImplementedException();
+      return x + y;
     }
 
     public int Subtract (int x, int y)
     {
-      throw new NotImplementedException();
+      return x - y;
     }
 
     public int Multiply (int x, int y)
