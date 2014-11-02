@@ -20,7 +20,6 @@ namespace OOP1Labs
       {
         Assert.AreEqual((x+y), LabFactory.Lab1().Add(x, y));
       }
-        
 
       [Test]
       public void Add_Zeroes_ReturnsZero()
@@ -54,40 +53,60 @@ namespace OOP1Labs
     [TestFixture]
     public class L1_01_02_Subtract
     {
-      [Test]
-      public void Subtract_LowNumbers()
+      [TestCase(1, 0)]
+      [TestCase(2, 1)]
+      [TestCase(32, 12)] 
+      [TestCase(2020, 1000)]
+      public void Subtract_GreaterXPositive_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(3, LabFactory.Lab1().Subtract(5, 2));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
 
-      [Test]
-      public void Subtract_HighNumbers()
+      [TestCase(1, 0)]
+      [TestCase(2, 1)]
+      [TestCase(32, 12)] 
+      [TestCase(2020, 1000)]
+      public void Subtract_GreaterYPositive_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(99018, LabFactory.Lab1().Subtract(104050, 5032));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
 
-      [Test]
-      public void Subtract_Zero()
+      [TestCase(0, 0)]
+      [TestCase(1, 1)]
+      [TestCase(-1, -1)]
+      [TestCase(152, 152)] 
+      [TestCase(-1040, -1040)] 
+      public void Subtract_EqualXandY_ReturnsZero(int x, int y)
       {
-        Assert.AreEqual(0, LabFactory.Lab1().Subtract(3, 3));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
 
-      [Test]
-      public void Subtract_SecondNegative()
+      [TestCase(-1, 0)]
+      [TestCase(-1, 1)]
+      [TestCase(-32, 12)] 
+      [TestCase(-2020, 1000)]
+      public void Subtract_NegativeX_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(5, LabFactory.Lab1().Subtract(2, -3));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
 
-      [Test]
-      public void Subtract_FirstNegative()
+      [TestCase(0, -1)]
+      [TestCase(1, -1)]
+      [TestCase(42, -14)] 
+      [TestCase(4050, -2200)]
+      public void Subtract_NegativeY_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(-5, LabFactory.Lab1().Subtract(-2, 3));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
 
-      [Test]
-      public void Subtract_BothNegative()
+      [TestCase(-1, -1)]
+      [TestCase(-10 -2)]
+      [TestCase(-2, -10)]
+      [TestCase(-8090 -4050)]
+      [TestCase(-4050 -8090)]
+      public void Subtract_NegativeXandY_ReturnsSum(int x, int y)
       {
-        Assert.AreEqual(1, LabFactory.Lab1().Subtract(-2, -3));
+        Assert.AreEqual((x-y), LabFactory.Lab1().Subtract(x, y));
       }
     }
 
@@ -95,39 +114,55 @@ namespace OOP1Labs
     public class L1_01_03_Multiply
     {
       [Test]
-      public void Multiply_LowNumbers()
+      [TestCase(2,2)]
+      [TestCase(2,12)]
+      [TestCase(32,46)]
+      public void Multiply_PositiveXandY_ReturnsProduct(int x, int y)
       {
-        Assert.AreEqual(6, LabFactory.Lab1().Multiply(2, 3));
+        Assert.AreEqual((x*y), LabFactory.Lab1().Multiply(x, y));
       }
 
       [Test]
-      public void Multiply_HighNumbers()
+      [TestCase(-2,  2)]
+      [TestCase( 2,  -2)]
+      [TestCase(-4,  14)]
+      [TestCase( 4, -14)]
+      public void Multiply_NegativeXorY_ReturnsProduct(int x, int y)
       {
-              Assert.AreEqual(523579600, LabFactory.Lab1().Multiply(104050, 5032));
+        Assert.AreEqual((x*y), LabFactory.Lab1().Multiply(x, y));
       }
 
       [Test]
-      public void Multiply_Zero()
+      [TestCase(-2,-2)]
+      [TestCase(-2,-12)]
+      [TestCase(-32,-46)]
+      public void Multiply_NegativeXandY_ReturnsProduct(int x, int y)
       {
-        Assert.AreEqual(0, LabFactory.Lab1().Multiply(3, 0));
+        Assert.AreEqual((x*y), LabFactory.Lab1().Multiply(x, y));
       }
 
       [Test]
-      public void Multiply_SecondNegative()
+      [TestCase(   0, 2)]
+      [TestCase(   0, 12)]
+      [TestCase(   0, -123)]
+      [TestCase(-123, 0)]
+      [TestCase(  12, 0)]
+      [TestCase(   2, 0)]
+      public void Multiply_XOrYZero_ReturnsZero(int x, int y)
       {
-        Assert.AreEqual(-6, LabFactory.Lab1().Multiply(2, -3));
+        Assert.AreEqual((x*y), LabFactory.Lab1().Multiply(x, y));
       }
 
       [Test]
-      public void Multiply_FirstNegative()
+      [TestCase(   1,2)]
+      [TestCase(   1,14)]
+      [TestCase(   1,1878)]
+      [TestCase(1878, 1)]
+      [TestCase(  14, 1)]
+      [TestCase(   2, 1)]
+      public void Multiply_XOrYOne_ReturnsTheOtherNumber(int x, int y)
       {
-        Assert.AreEqual(-6, LabFactory.Lab1().Multiply(-2, 3));
-      }
-
-      [Test]
-      public void Multiply_BothNegative()
-      {
-        Assert.AreEqual(6, LabFactory.Lab1().Multiply(-2, -3));
+        Assert.AreEqual((x*y), LabFactory.Lab1().Multiply(x, y));
       }
     }
   }
@@ -169,144 +204,138 @@ namespace OOP1Labs
     public class L1_03_01_DivideIntegers
     {
       [Test]
-      public void DivideIntegers_LowEven()
+      [TestCase(1,1)]
+      [TestCase(4,2)]
+      [TestCase(424,8)]
+      public void DivideIntegers_Even(int n, int d)
       {
-        Assert.AreEqual(2, LabFactory.Lab1().DivideIntegers(4, 2));
+        Assert.AreEqual((n/d), LabFactory.Lab1().DivideIntegers(n, d));
       }
 
       [Test]
-      public void DivideIntegers_LowUneven()
+      [TestCase(1,2)]
+      [TestCase(5,3)]
+      [TestCase(423,8)]
+      public void DivideIntegers_Uneven(int n, int d)
       {
-        Assert.AreEqual(2, LabFactory.Lab1().DivideIntegers(5, 2));
+        Assert.AreEqual((n/d), LabFactory.Lab1().DivideIntegers(n, d));
       }
 
       [Test]
-      public void DivideIntegers_HighEven()
+      [TestCase(8,-2)]
+      [TestCase(16,-4)]
+      public void DivideIntegers_SecondNegative(int n, int d)
       {
-        Assert.AreEqual(53, LabFactory.Lab1().DivideIntegers(424, 8));
+        Assert.AreEqual((n/d), LabFactory.Lab1().DivideIntegers(n, d));
       }
 
       [Test]
-      public void DivideIntegers_HighUneven()
+      [TestCase(-8,  2)]
+      [TestCase(-16, 4)]
+      public void DivideIntegers_FirstNegative(int n, int d)
       {
-        Assert.AreEqual(52, LabFactory.Lab1().DivideIntegers(423, 8));
+        Assert.AreEqual((n/d), LabFactory.Lab1().DivideIntegers(n, d));
       }
 
       [Test]
-      public void DivideIntegers_SecondNegative()
-      {
-        Assert.AreEqual(-4, LabFactory.Lab1().DivideIntegers(8, -2));
-      }
-
-      [Test]
-      public void DivideIntegers_FirstNegative()
-      {
-        Assert.AreEqual(-5, LabFactory.Lab1().DivideIntegers(-10, 2));
-      }
-
-      [Test]
-      public void DivideIntegers_LargerDenominator()
+      [TestCase(8,  10)]
+      [TestCase(-2, 4)]
+      public void DivideIntegers_LargerDenominator(int n, int d)
       {
         Assert.AreEqual(0, LabFactory.Lab1().DivideIntegers(8, 10));
       }
+    }
+
+    [TestFixture]
+    public class L1_03_02_DivideExact_DoublesToDouble
+    {
+      [Test]
+      [TestCase(4,2)]
+      [TestCase(9,3)]
+      [TestCase(400.4,200.2)]
+      [TestCase(360.8,180.4)]
+      public void DivideExact_DoublesToDouble_Even(double n, double d)
+      {
+        Assert.AreEqual((double)n/(double)d, LabFactory.Lab1().DivideExact(n, d));
+      }
 
       [Test]
-      [ExpectedException(typeof(DivideByZeroException))]
-      public void DivideIntegers_DivideByZero()
+      [TestCase(425.4, 8)]
+      [TestCase(4.5,   2.4)]
+      [TestCase(360.9, 180.4)]
+      public void DivideExact_DoublesToDouble_Uneven(double n, double d)
       {
-        LabFactory.Lab1().DivideIntegers(2, 0);
+        Assert.AreEqual((double)n/(double)d, LabFactory.Lab1().DivideExact(n, d));
+      }
+
+      [Test]
+      [TestCase(425.4, -8)]
+      [TestCase(4.5,   -2.4)]
+      [TestCase(360.9, -180.4)]
+      public void DivideExact_DoublesToDouble_SecondNegativeAndUneven(double n, double d)
+      {
+        Assert.AreEqual((double)n/(double)d, LabFactory.Lab1().DivideExact(n, d));
+      }
+
+      [Test]
+      [TestCase(-425.4, 8)]
+      [TestCase(-4.5,   2.4)]
+      [TestCase(-360.9, 180.4)]
+      public void DivideExact_DoublesToDouble_FirstNegativeAndUneven(double n, double d)
+      {
+        Assert.AreEqual((double)n/(double)d, LabFactory.Lab1().DivideExact(n, d));
+      }
+
+      [Test]
+      [TestCase(2.5,  8)]
+      [TestCase(-2.5, 3)]
+      [TestCase(150, 38090)]
+      public void DivideExact_DoublesToDouble_LargerDenominatorUneven(double n, double d)
+      {
+        Assert.AreEqual((double)n/(double)d, LabFactory.Lab1().DivideExact(n, d));
       }
     }
 
     [TestFixture]
-    public class L1_03_02_DivideExact_IntsToDouble
+    public class L1_03_03_DivideExact_IntsToDouble
     {
       [Test]
-      public void DivideExact_IntsToDouble_LowEven()
+      [TestCase(4,2)]
+      [TestCase(32,16)]
+      [TestCase(360,2)]
+      public void DivideExact_IntsToDouble_Even(int n, int d)
       {
-        Assert.AreEqual(2.0, LabFactory.Lab1().DivideExact(4, 2));
+        Assert.AreEqual(((double)n/(double)d), LabFactory.Lab1().DivideExact(n, d));
       }
 
       [Test]
-      public void DivideExact_IntsToDouble_LowUneven()
+      [TestCase(5,2)]
+      [TestCase(9,4)]
+      [TestCase(360,7)]
+      public void DivideExact_IntsToDouble_Uneven(int n, int d)
       {
-        Assert.AreEqual(2.5, LabFactory.Lab1().DivideExact(5, 2));
+        Assert.AreEqual(((double)n/(double)d), LabFactory.Lab1().DivideExact(n, d));
       }
 
       [Test]
-      public void DivideExact_IntsToDouble_HighEven()
+      [TestCase(5,  -2)]
+      [TestCase(9,  -4)]
+      [TestCase(360,-7)]
+      [TestCase( -2, 5)]
+      [TestCase( -4, 9)]
+      [TestCase( -7,360)]
+      public void DivideExact_IntsToDouble_UnevenAndNegativeNorD(int n, int d)
       {
-        Assert.AreEqual(54, LabFactory.Lab1().DivideExact(432, 8));
+        Assert.AreEqual(((double)n/(double)d), LabFactory.Lab1().DivideExact(n, d));
       }
 
       [Test]
-      public void DivideExact_IntsToDouble_HighUneven()
+      [TestCase(1,2)]
+      [TestCase(1,3)]
+      [TestCase(50,102)]
+      public void DivideExact_IntsToDouble_LargerDenominatorUneven(int n, int d)
       {
-        Assert.AreEqual(52.875, LabFactory.Lab1().DivideExact(423, 8));
-      }
-
-      [Test]
-      public void DivideExact_IntsToDouble_SecondNegativeUneven()
-      {
-        Assert.AreEqual(-4.5, LabFactory.Lab1().DivideExact(9, -2));
-      }
-
-      [Test]
-      public void DivideExact_IntsToDouble_FirstNegativeUneven()
-      {
-        Assert.AreEqual(-5.5, LabFactory.Lab1().DivideExact(-11, 2));
-      }
-
-      [Test]
-      public void DivideExact_IntsToDouble_LargerDenominatorUneven()
-      {
-        Assert.AreEqual(0.8, LabFactory.Lab1().DivideExact(8, 10));
-      }
-    }
-
-    [TestFixture]
-    public class L1_03_03_DivideDoublesToDouble
-    {
-      [Test]
-      public void Divide_DoublesToDouble_LowEven()
-      {
-        Assert.AreEqual(2.0, LabFactory.Lab1().DivideExact(4.0, 2.0));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_LowUneven()
-      {
-        Assert.AreEqual(1.875, LabFactory.Lab1().DivideExact(4.5, 2.4));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_HighEven()
-      {
-        Assert.AreEqual(54, LabFactory.Lab1().DivideExact(432, 8));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_HighUneven()
-      {
-        Assert.AreEqual(53.175, LabFactory.Lab1().DivideExact(425.4, 8.0));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_SecondNegativeUneven()
-      {
-        Assert.AreEqual(-3.7, LabFactory.Lab1().DivideExact(9.25, -2.5));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_FirstNegativeUneven()
-      {
-        Assert.AreEqual(-4.6, LabFactory.Lab1().DivideExact(-11.5, 2.5));
-      }
-
-      [Test]
-      public void Divide_DoublesToDouble_LargerDenominatorUneven()
-      {
-        Assert.AreEqual(0.3125, LabFactory.Lab1().DivideExact(2.5, 8.0));
+        Assert.AreEqual(((double)n/(double)d), LabFactory.Lab1().DivideExact(n, d));
       }
     }
 

@@ -29,12 +29,12 @@ namespace OOP1Labs
       throw new NotImplementedException();
     }
 
-    public double DivideExact (int numerator, int denominator)
+    public double DivideExact (double numerator, double denominator)
     {
       throw new NotImplementedException();
     }
 
-    public double DivideExact (double numerator, double denominator)
+    public double DivideExact (int numerator, int denominator)
     {
       throw new NotImplementedException();
     }
@@ -143,7 +143,7 @@ namespace OOP1Labs
     {
       throw new NotImplementedException();
     }
-    
+
     public string MultiplicationTableSum(int factor, int start, int end)
     {
       throw new NotImplementedException();
