@@ -870,16 +870,9 @@ namespace OOP1Labs
       [TestCase("a43")]
       [TestCase("123-45")]
       [TestCase("#123")]
-      public void StringToInt_NonNumbers_ThrowsException(string number)
-      {
-        LabFactory.Lab1().StringToInt(number);
-      }
-
-      [Test]
-      [ExpectedException]
       [TestCase("")]
       [TestCase(" ")]
-      public void StringToInt_Empty_ThrowsException(string number)
+      public void StringToInt_NonNumbers_ThrowsException(string number)
       {
         LabFactory.Lab1().StringToInt(number);
       }
@@ -892,51 +885,57 @@ namespace OOP1Labs
     public class L1_07_01_CanJoyride
     {
       [Test]
-      public void CanJoyride_TrueWhenOldAndTallEnoughAndNoHeartCondition()
+      [TestCase(12, 150, false)]
+      [TestCase(80, 210, false)]
+      [TestCase(30, 170, false)]
+      public void CanJoyride_OldAndTallEnoughAndNoHeartCondition_ReturnsTrue(int age, int cm, bool badHeart)
       {
-        Assert.IsTrue(LabFactory.Lab1().CanJoyride(12, 150, false));
-        Assert.IsTrue(LabFactory.Lab1().CanJoyride(80, 210, false));
-        Assert.IsTrue(LabFactory.Lab1().CanJoyride(30, 170, false));
+        Assert.IsTrue(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
 
       [Test]
-      public void CanJoyride_TrueWhenAdultButNotTallEnoughButAboveLowestHeightLimitAndNoHeartCondition()
+      [TestCase(18, 149, false)]
+      [TestCase(25, 130, false)]
+      public void CanJoyride_AdultButTooShortButAboveLowestHeightLimitAndNoHeartCondition_ReturnsTrue(int age, int cm, bool badHeart)
       {
-        Assert.IsTrue(LabFactory.Lab1().CanJoyride(18, 149, false));
-        Assert.IsTrue(LabFactory.Lab1().CanJoyride(25, 130, false));
+        Assert.IsTrue(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
 
       [Test]
-      public void CanJoyride_FalseWhenNotTallEnough()
+      [TestCase(7,  149, false)]
+      [TestCase(11, 130, false)]
+      [TestCase(8,  80,  true)]
+      public void CanJoyride_NotTallEnough_ReturnsFalse(int age, int cm, bool badHeart)
       {
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(7, 149, false));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(11, 130, false));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(8, 80, true));
+        Assert.IsFalse(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
 
       [Test]
-      public void CanJoyride_FalseWhenTooTall()
+      [TestCase(18, 211, false)]
+      [TestCase(32, 220, true)]
+      [TestCase(72, 240, false)]
+      public void CanJoyride_TooTall_ReturnsFalse(int age, int cm, bool badHeart)
       {
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 211, false));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(32, 220, true));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(72, 240, false));
+        Assert.IsFalse(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
 
       [Test]
-      public void CanJoyride_FalseWhenEvenBelowLowesetHeightLimitForAdults()
+      [TestCase(18, 129, false)]
+      [TestCase(25, 100, true)]
+      public void CanJoyride_BelowLowesetHeightLimitForAdults_ReturnsFalse(int age, int cm, bool badHeart)
       {
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 129, false));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(25, 100, true));
+        Assert.IsFalse(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
 
       [Test]
-      public void CanJoyride_FalseWhenHeartCondition()
+      [TestCase(18, 128, true)]
+      [TestCase(18, 148, true)]
+      [TestCase(18, 180, true)]
+      [TestCase(18, 180, true)]
+      [TestCase(25, 100, true)]
+      public void CanJoyride_HeartCondition_ReturnsFalse(int age, int cm, bool badHeart)
       {
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 128, true));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 148, true));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 180, true));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(18, 180, true));
-        Assert.IsFalse(LabFactory.Lab1().CanJoyride(25, 100, true));
+        Assert.IsFalse(LabFactory.Lab1().CanJoyride(age, cm, badHeart));
       }
     }
 
@@ -944,33 +943,37 @@ namespace OOP1Labs
     public class L1_07_02_DateDistance
     {
       [Test]
-      public void DateDistance_LeftAllGreater_ReturnsAbsoluteDifference()
+      [TestCase(2, 2, 2, 1, 1, 1,           Result="1 year(s), 1 month(s), and 1 day(s).")]
+      [TestCase(2030, 20, 20, 2028, 10, 15, Result="2 year(s), 10 month(s), and 5 day(s).")]
+      public string DateDistance_LeftAllGreater_ReturnsAbsoluteDifference(int y1, int m1, int d1, int y2, int m2, int d2)
       {
-        Assert.AreEqual("1 year(s), 1 month(s), and 1 day(s).", LabFactory.Lab1().DateDistance(2, 2, 2, 1, 1, 1));
-        Assert.AreEqual("2 year(s), 10 month(s), and 5 day(s).", LabFactory.Lab1().DateDistance(2030, 20, 20, 2028, 10, 15));
+        return LabFactory.Lab1().DateDistance(y1, m1, d1, y2, m2, d2);
       }
 
       [Test]
-      public void DateDistance_RightAllGreater_ReturnsAbsoluteDifference()
+      [TestCase(0, 0, 0, 1, 1, 1,      Result="1 year(s), 1 month(s), and 1 day(s).")]
+      [TestCase(400, 4, 0, 3045, 8, 7, Result="2645 year(s), 4 month(s), and 7 day(s).")]
+      public string DateDistance_RightAllGreater_ReturnsAbsoluteDifference(int y1, int m1, int d1, int y2, int m2, int d2)
       {
-        Assert.AreEqual("1 year(s), 1 month(s), and 1 day(s).", LabFactory.Lab1().DateDistance(0, 0, 0, 1, 1, 1));
-        Assert.AreEqual("2645 year(s), 4 month(s), and 7 day(s).", LabFactory.Lab1().DateDistance(400, 4, 0, 3045, 8, 7));
+        return LabFactory.Lab1().DateDistance(y1, m1, d1, y2, m2, d2);
       }
 
       [Test]
-      public void DateDistance_Equal_ReturnsAbsoluteDifference()
+      [TestCase(1, 1, 1, 1, 1, 1,       Result="0 year(s), 0 month(s), and 0 day(s).")]
+      [TestCase(540, 3, 13, 540, 3, 13, Result="0 year(s), 0 month(s), and 0 day(s).")]
+      public string DateDistance_Equal_ReturnsAbsoluteDifference(int y1, int m1, int d1, int y2, int m2, int d2)
       {
-        Assert.AreEqual("0 year(s), 0 month(s), and 0 day(s).", LabFactory.Lab1().DateDistance(1, 1, 1, 1, 1, 1));
-        Assert.AreEqual("0 year(s), 0 month(s), and 0 day(s).", LabFactory.Lab1().DateDistance(540, 3, 13, 540, 3, 13));
+        return LabFactory.Lab1().DateDistance(y1, m1, d1, y2, m2, d2);
       }
 
       [Test]
-      public void DateDistance_Mixed_ReturnsAbsoluteDistance()
+      [TestCase(1, 0, 0, 0, 1, 0,          Result="1 year(s), 1 month(s), and 0 day(s).")]
+      [TestCase(0, 1, 0, 1, 0, 0,          Result="1 year(s), 1 month(s), and 0 day(s).")]
+      [TestCase(0, 0, 1, 1, 0, 0,          Result="1 year(s), 0 month(s), and 1 day(s).")]
+      [TestCase(4030, 5, 20, 1000, 12, 16, Result="3030 year(s), 7 month(s), and 4 day(s).")]
+      public string DateDistance_Mixed_ReturnsAbsoluteDistance(int y1, int m1, int d1, int y2, int m2, int d2)
       {
-        Assert.AreEqual("1 year(s), 1 month(s), and 0 day(s).", LabFactory.Lab1().DateDistance(1, 0, 0, 0, 1, 0));
-        Assert.AreEqual("1 year(s), 1 month(s), and 0 day(s).", LabFactory.Lab1().DateDistance(0, 1, 0, 1, 0, 0));
-        Assert.AreEqual("1 year(s), 0 month(s), and 1 day(s).", LabFactory.Lab1().DateDistance(0, 0, 1, 1, 0, 0));
-        Assert.AreEqual("3030 year(s), 7 month(s), and 4 day(s).", LabFactory.Lab1().DateDistance(4030, 5, 20, 1000, 12, 16));
+        return LabFactory.Lab1().DateDistance(y1, m1, d1, y2, m2, d2);
       }
     }
 
@@ -978,33 +981,37 @@ namespace OOP1Labs
     public class L1_07_03_IsLeapYear
     {
       [Test]
-      public void IsLeapYear_FalseIfNotDivisibleBy4()
+      [TestCase(750)]
+      [TestCase(93)]
+      [TestCase(14523)]
+      public void IsLeapYear_NotDivisibleBy4_ReturnsFalse(int year)
       {
-        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(750));
-        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(93));
-        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(14523));
+        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(year));
       }
 
       [Test]
-      public void IsLeapYear_TrueIfDivisibleBy4ButNotDivisibleBy100()
+      [TestCase(80)]
+      [TestCase(1220)]
+      public void IsLeapYear_DivisibleBy4ButNotDivisibleBy100_ReturnsTrue(int year)
       {
-        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(80));
-        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(1220));
+        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(year));
       }
 
       [Test]
-      public void IsLeapYear_FalseIfDivisibleBy4AndDivisibleBy100AndNotDivisibleBy400()
+      [TestCase(1300)]
+      [TestCase(80200)]
+      public void IsLeapYear_DivisibleBy4AndDivisibleBy100AndNotDivisibleBy400_ReturnsFalse(int year)
       {
-        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(1300));
-        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(80200));
+        Assert.IsFalse(LabFactory.Lab1().IsLeapYear(year));
       }
 
       [Test]
-      public void IsLeapYear_TrueIfDivisibleBy4AndDivisibleBy100AndDivisibleBy400()
+      [TestCase(400)]
+      [TestCase(4800)]
+      [TestCase(52400)]
+      public void IsLeapYear_DivisibleBy4AndDivisibleBy100AndDivisibleBy400_ReturnsTrue(int year)
       {
-        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(400));
-        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(4800));
-        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(52400));
+        Assert.IsTrue(LabFactory.Lab1().IsLeapYear(year));
       }
     }
   }
@@ -1253,46 +1260,69 @@ namespace OOP1Labs
       [TestCase(0,0,0)]
       [TestCase(1,0,0)]
       [TestCase(-1,1,1)]
-      [TestCase(0,12,12)]
-      [TestCase(0,-3,-3)]
-      [TestCase(0,15,15)]
-      [TestCase(0,4507,4507)]
+      [TestCase(1,12,12)]
+      [TestCase(2,-3,-3)]
+      [TestCase(3,15,15)]
+      [TestCase(4,4507,4507)]
       public void MultiplicationTableSum_ZeroSteps_ReturnsJustZero(int factor, int start, int end)
       {
         Assert.AreEqual("0", LabFactory.Lab1().MultiplicationTableSum(factor, start, end));
       }
 
       [Test]
-      [TestCase(2,3,6)]
-      public void MultiplicationTableSum_SecondTableFourSteps_CalculatesTo36(int factor, int start, int end)
+      [TestCase(1,0,1,   Result="(1*0)+(1*1) = 0+1 = 1")]
+      [TestCase(1,1,2,   Result="(1*1)+(1*2) = 1+2 = 3")]
+      [TestCase(2,0,3,   Result="(2*0)+(2*1)+(2*2)+(2*3) = 0+2+4+6 = 12")]
+      [TestCase(2,1,4,   Result="(2*1)+(2*2)+(2*3)+(2*4) = 2+4+6+8 = 20")]
+      [TestCase(2,3,6,   Result="(2*3)+(2*4)+(2*5)+(2*6) = 6+8+10+12 = 36")]
+      [TestCase(1,10,11, Result="(1*10)+(1*11) = 10+11 = 21")]
+      public string MultiplicationTableSum_Ascending(int factor, int start, int end)
       {
-        string expected = "(2*3)+(2*4)+(2*5)+(2*6) = 6+8+10+12 = 36";
-        string actual   = LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
-        Assert.AreEqual(expected, actual);
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
       }
 
       [Test]
-      [TestCase(1,0,1)]
-      public void MultiplicationTableSum_Trivial_CalculatesTo1(int factor, int start, int end)
+      [TestCase(1,1,0,   Result="(1*1)+(1*0) = 1+0 = 1")]
+      [TestCase(1,2,1,   Result="(1*2)+(1*1) = 2+1 = 3")]
+      [TestCase(2,3,0,   Result="(2*3)+(2*2)+(2*1)+(2*0) = 6+4+2+0 = 12")]
+      [TestCase(2,4,1,   Result="(2*4)+(2*3)+(2*2)+(2*1) = 8+6+4+2 = 20")]
+      [TestCase(2,6,3,   Result="(2*6)+(2*5)+(2*4)+(2*3) = 12+10+8+6 = 36")]
+      [TestCase(1,11,10, Result="(1*11)+(1*10) = 11+10 = 21")]
+      public string MultiplicationTableSum_Descending(int factor, int start, int end)
       {
-        string actual = LabFactory.Lab1().MultiplicationTableSum(1, 0, 1);
-        Assert.AreEqual("(1*0)+(1*1) = 0+1 = 1", actual);
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
       }
 
       [Test]
-      [TestCase(3,-2,2)]
-      public void MultiplicationTableSum_AroundZero_CalculatesFromBelowZeroToAbove(int factor, int start, int end)
+      [TestCase(3,-2,2,  Result="(3*-2)+(3*-1)+(3*0)+(3*1)+(3*2) = -6+-3+0+3+6 = 0")]
+      [TestCase(10,-1,2, Result="(10*-1)+(10*0)+(10*1)+(10*2) = -10+0+10+20 = 20")]
+      public string MultiplicationTableSum_AscendingWrappingAroundZero(int factor, int start, int end)
       {
-        string actual = LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
-        Assert.AreEqual("(3*-2)+(3*-1)+(3*0)+(3*1)+(3*2) = -6+-3+0+3+6 = 0", actual);
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
       }
 
       [Test]
-      [TestCase(5,-4,-2)]
-      public void MultiplicationTableSum_Negative_CalculatesNegativeSum(int factor, int start, int end)
+      [TestCase(3,2,-2,  Result="(3*2)+(3*1)+(3*0)+(3*-1)+(3*-2) = 6+3+0+-3+-6 = 0")]
+      [TestCase(10,1,-2, Result="(10*1)+(10*0)+(10*-1)+(10*-2) = 10+0+-10+-20 = -20")]
+      public string MultiplicationTableSum_DescendingWrappingAroundZero(int factor, int start, int end)
       {
-        string actual = LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
-        Assert.AreEqual("(5*-4)+(5*-3)+(5*-2) = -20+-15+-10 = -45", actual);
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
+      }
+
+      [Test]
+      [TestCase(5,-4,-2,  Result="(5*-4)+(5*-3)+(5*-2) = -20+-15+-10 = -45")]
+      [TestCase(2,-10,-9, Result="(2*-10)+(2*-9) = -20+-18 = -38")]
+      public string MultiplicationTableSum_AscendingNegativeRange_CalculatesNegativeSum(int factor, int start, int end)
+      {
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
+      }
+
+      [Test]
+      [TestCase(5,-2,-4,  Result="(5*-2)+(5*-3)+(5*-4) = -10+-15+-20 = -45")]
+      [TestCase(2,-9,-10, Result="(2*-9)+(2*-10) = -18+-20 = -38")]
+      public string MultiplicationTableSum_DescendingNegativeRange_CalculatesNegativeSum(int factor, int start, int end)
+      {
+        return LabFactory.Lab1().MultiplicationTableSum(factor, start, end);
       }
     }
   }
